@@ -13,6 +13,9 @@ export default {
         secondary: "#e0ff5d",
         tertiary: "#7545db",
       },
+      fontFamily: {
+        lex: ["Lexend", "sans-serif"],
+      },
     },
   },
   plugins: [],
