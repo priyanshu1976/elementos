@@ -1,13 +1,23 @@
 "use client";
 import React from "react";
-import Landing from "./section/landing";
+import Navbar from "./components/navbar";
+import Hero from "./components/hero";
+import DiscoverSection from "./components/discover-section";
+import TicketSection from "./components/ticket-section";
+import SpeakersSection from "./components/speakers-section";
+import Footer from "./components/footer";
 
-function page() {
+export default function page() {
   return (
-    <div className="w-screen h-screen bg-primary">
-      <Landing />
+    <div className="min-h-screen flex flex-col">
+      
+      <Navbar />
+      <Hero />
+      <TicketSection />
+      <DiscoverSection />
+      <SpeakersSection />
+      <Footer />
     </div>
   );
 }
 
-export default page;
