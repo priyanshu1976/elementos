@@ -81,9 +81,12 @@ export default function RegistrationForm({
       },
     };
 
-    const response = await axios.post("/api/gettoken", {
-      email: formData.teamLeader.email,
-    });
+    const response = await axios.post(
+      "/api/gettoken",
+      JSON.stringify({
+        email: formData.teamLeader.email,
+      })
+    );
 
     window.location.href = `/thanks/${response.data}`;
 
