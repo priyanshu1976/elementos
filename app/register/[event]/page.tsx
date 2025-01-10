@@ -1,8 +1,9 @@
 "use client";
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useEffect, useState, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
+import { db } from "@/firebase.config";
+import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 
-// Define the types for form data
 interface TeamMember {
   name: string;
   email: string;
@@ -15,15 +16,59 @@ interface FormData {
   members: TeamMember[];
 }
 
-export default function RegistrationForm() {
+export default function RegistrationForm({
+  params,
+}: {
+  params: { event: string };
+}) {
   const [formData, setFormData] = useState<FormData>({
     teamName: "",
     teamLeader: { name: "", email: "", phone: "" },
     members: Array(4).fill({ name: "", email: "", phone: "" }),
   });
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const eventCollection = params.event;
+
+  useEffect(() => {
+    const initializeCollection = async () => {
+      try {
+        const eventDocRef = doc(db, eventCollection, "metadata");
+        const eventDocSnap = await getDoc(eventDocRef);
+
+        if (!eventDocSnap.exists()) {
+          // Create metadata or placeholder if the collection doesn't exist
+          await setDoc(eventDocRef, { createdAt: new Date().toISOString() });
+          console.log(`Collection "${eventCollection}" initialized.`);
+        } else {
+          console.log(`Collection "${eventCollection}" already exists.`);
+        }
+      } catch (err) {
+        console.error("Error initializing collection:", err);
+      }
+    };
+
+    initializeCollection();
+  }, [eventCollection]);
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    try {
+      const teamDocRef = doc(
+        collection(db, eventCollection),
+        formData.teamName
+      );
+      await setDoc(teamDocRef, {
+        teamName: formData.teamName,
+        teamLeader: formData.teamLeader,
+        members: formData.members,
+        createdAt: new Date().toISOString(),
+      });
+      console.log("Team data submitted:", formData);
+      // Redirect or display success message
+    } catch (err) {
+      console.error("Error submitting team data:", err);
+    }
 
     const data = {
       service_id: "service_psei7iv",
@@ -35,7 +80,14 @@ export default function RegistrationForm() {
       },
     };
 
-    // db mei store karke token return kar diya
+    const response = await axios.post("/api/gettoken", {
+      email: formData.teamLeader.email,
+    });
+
+    const { token }: { token: string } = response.data as { token: string };
+
+    console.log(token);
+    window.location.href = `/thanks/${token}`;
 
     axios
       .post("https://api.emailjs.com/api/v1.0/email/send", data)
@@ -43,15 +95,11 @@ export default function RegistrationForm() {
         console.log("data send for email");
         // Sign a JWT with a secret and send it to the next page in parameters
         // Navigate to the event registration page with JWT token
-        const token: string = "eoirhoiuefbiu";
-        window.location.href = `/thanks/${token}`;
       })
       .catch((err) => {
         console.log("this coderan that means error");
         console.log(err.message);
       });
-
-    console.log("Form submitted:", formData);
   };
 
   const handleChange = (
@@ -80,7 +128,6 @@ export default function RegistrationForm() {
         <h2 className="text-[#c5f82a] text-2xl mb-8 font-mono">
           TEAM REGISTRATION
         </h2>
-
         <form onSubmit={handleSubmit} className="space-y-8">
           <div className="space-y-4">
             <input
@@ -91,7 +138,6 @@ export default function RegistrationForm() {
                 handleChange("team", null, "teamName", e.target.value)
               }
             />
-
             <div className="bg-gray-800/50 p-6 rounded-lg space-y-4">
               <h3 className="text-[#c5f82a] text-lg mb-4">Team Leader</h3>
               <input
@@ -119,7 +165,6 @@ export default function RegistrationForm() {
                 }
               />
             </div>
-
             {[0, 1, 2, 3].map((index) => (
               <div
                 key={index}
@@ -155,7 +200,6 @@ export default function RegistrationForm() {
               </div>
             ))}
           </div>
-
           <button
             type="submit"
             className="w-full bg-[#c5f82a] text-gray-900 py-4 rounded-lg font-semibold text-lg hover:bg-[#d4ff33] transition-colors"

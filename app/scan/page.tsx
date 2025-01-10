@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect } from "react";
 import { Html5QrcodeScanner } from "html5-qrcode";
 import axios from "axios";
