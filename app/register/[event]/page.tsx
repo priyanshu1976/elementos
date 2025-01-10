@@ -19,7 +19,7 @@ interface FormData {
 export default function RegistrationForm({
   params,
 }: {
-  params: { event: string };
+  params: Promise<{ id: string }>;
 }) {
   const [formData, setFormData] = useState<FormData>({
     teamName: "",
@@ -27,20 +27,21 @@ export default function RegistrationForm({
     members: Array(4).fill({ name: "", email: "", phone: "" }),
   });
 
-  const eventCollection = params.event;
+  const [eventCollection, setcollection] = useState("");
 
   useEffect(() => {
     const initializeCollection = async () => {
       try {
-        const eventDocRef = doc(db, eventCollection, "metadata");
+        const { id } = await params;
+        setcollection(id);
+        const eventDocRef = doc(db, id, "metadata");
         const eventDocSnap = await getDoc(eventDocRef);
 
         if (!eventDocSnap.exists()) {
-          // Create metadata or placeholder if the collection doesn't exist
           await setDoc(eventDocRef, { createdAt: new Date().toISOString() });
-          console.log(`Collection "${eventCollection}" initialized.`);
+          console.log(`Collection "${id}" initialized.`);
         } else {
-          console.log(`Collection "${eventCollection}" already exists.`);
+          console.log(`Collection "${id}" already exists.`);
         }
       } catch (err) {
         console.error("Error initializing collection:", err);
@@ -48,7 +49,7 @@ export default function RegistrationForm({
     };
 
     initializeCollection();
-  }, [eventCollection]);
+  }, []);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -84,10 +85,7 @@ export default function RegistrationForm({
       email: formData.teamLeader.email,
     });
 
-    const { token }: { token: string } = response.data as { token: string };
-
-    console.log(token);
-    window.location.href = `/thanks/${token}`;
+    window.location.href = `/thanks/${response.data}`;
 
     axios
       .post("https://api.emailjs.com/api/v1.0/email/send", data)
