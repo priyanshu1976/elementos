@@ -6,7 +6,9 @@ export async function POST(req: Request) {
   console.log(data);
   const token = jwt.sign({ email: data.email }, "merasecret");
 
-  return NextResponse.json({
-    token: token,
-  });
+  return NextResponse.json(
+    JSON.stringify({
+      token: token,
+    })
+  );
 }
