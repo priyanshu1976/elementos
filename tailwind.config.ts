@@ -15,6 +15,7 @@ export default {
       },
       fontFamily: {
         lex: ["Lexend", "sans-serif"],
+        ter: ["'Playwrite IS'", "serif"], // Add your font here
       },
     },
   },

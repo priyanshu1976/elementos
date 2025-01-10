@@ -4,11 +4,11 @@ import { useState, useEffect } from "react";
 
 function Landing() {
   return (
-    <div className="p-3">
+    <div className="p-3 mx-auto w-screen flex flex-col justify-center items-center">
       <h1 className="font-lex text-[100px] text-white ">elemetos</h1>
-      <div className="flex">
+      <div className="flex w-[80%] justify-around">
+        <SponsorSection />
         <Timer />
-        {/* <SponsorSection /> */}
       </div>
     </div>
   );
@@ -19,9 +19,9 @@ export default Landing;
 const Timer = () => {
   const [time, setTime] = useState({
     days: 0,
-    hours: 23,
-    minutes: 4,
-    seconds: 47,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
   });
 
   useEffect(() => {
@@ -42,8 +42,8 @@ const Timer = () => {
   }, []);
 
   return (
-    <div className="bg-gray-900 p-8 rounded-lg max-w-xl ">
-      <h1 className="font-lex text-white text-xl mb-8 opacity-50 font-">
+    <div className="bg-[#23283d] p-8 rounded-3xl max-w-xl h-[320px]">
+      <h1 className=" text-white text-xl mb-8 opacity-50 font-ter">
         Welcome to EventX, the ultimate destination for discovering and booking
         upcoming events.
       </h1>
@@ -72,7 +72,7 @@ const Timer = () => {
           <span>Book Your Seat for EVENTX</span>
           <span className="bg-tertiary p-2 rounded-full">
             <svg
-              className="w-6 h-6 text-white"
+              className="w-6  text-white"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -93,39 +93,27 @@ const Timer = () => {
 
 const SponsorSection = () => {
   const sponsors = [
-    { name: "Indeed", className: "text-2xl font-light" },
-    { name: "Sky One", className: "tracking-wider" },
-    { name: "OPTIMUS", className: "italic" },
-    { name: "LASERLITE", className: "tracking-widest" },
+    { name: "indeed", className: "font-light text-3xl" },
+    { name: "SKY|one", className: "tracking-wider text-2xl" },
+    { name: "OPTIMUS", className: "italic text-2xl" },
+    { name: "LASERLITE", className: "tracking-widest text-xl" },
   ];
 
   return (
-    <div className="bg-gray-900 p-6 rounded-lg max-w-xl relative">
-      <h2 className="text-yellow-300 mb-6">SPONSOR</h2>
+    <div className="bg-[#23283d] p-8 rounded-2xl w-[35%]">
+      <h2 className="text-[#c5f82a] text-xl mb-12 font-mono tracking-wider">
+        SPONSOR
+      </h2>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col space-y-8">
         {sponsors.map((sponsor) => (
           <div
             key={sponsor.name}
-            className={`text-gray-500 ${sponsor.className}`}
+            className={`text-gray-600 ${sponsor.className}`}
           >
             {sponsor.name}
           </div>
         ))}
-      </div>
-
-      <div className="absolute right-6 top-1/2 -translate-y-1/2">
-        <div className="relative">
-          <div
-            className="w-24 h-24 bg-yellow-300 rounded-full absolute animate-spin-slow"
-            style={{
-              clipPath: "polygon(50% 0%, 100% 0, 100% 100%, 50% 100%, 60% 50%)",
-            }}
-          ></div>
-          <button className="w-16 h-16 bg-gray-900 rounded-full absolute top-4 left-4 flex items-center justify-center">
-            <div className="w-0 h-0 border-t-8 border-t-transparent border-l-16 border-l-white border-b-8 border-b-transparent ml-1"></div>
-          </button>
-        </div>
       </div>
     </div>
   );
