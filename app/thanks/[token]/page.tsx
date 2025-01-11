@@ -29,7 +29,7 @@ export default function ThanksPage() {
             alt="Registration QR Code"
             width={150}
             height={150}
-            className="mx-auto rounded-lg"
+            className="mx-auto"
           />
         </div>
 

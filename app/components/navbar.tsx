@@ -15,18 +15,15 @@ export function Navbar() {
           <Link href="/" className="hover:text-[#CCFF00]">
             HOME
           </Link>
+
           <Link href="/events" className="hover:text-[#CCFF00]">
             EVENTS
           </Link>
-          <Link href="/schedule" className="hover:text-[#CCFF00]">
-            SCHEDULE
+
+          <Link href="/events" className="hover:text-[#CCFF00]">
+            SPEAKER
           </Link>
-          <Link href="/venue" className="hover:text-[#CCFF00]">
-            VENUE
-          </Link>
-          <Link href="/contact" className="hover:text-[#CCFF00]">
-            CONTACT US
-          </Link>
+
           <Link href="https://instagram.com" className="text-[#CCFF00]">
             <Instagram className="h-6 w-6" />
           </Link>
@@ -47,17 +44,13 @@ export function Navbar() {
           <Link href="/" className="hover:text-[#CCFF00]">
             HOME
           </Link>
+
           <Link href="/events" className="hover:text-[#CCFF00]">
             EVENTS
           </Link>
-          <Link href="/schedule" className="hover:text-[#CCFF00]">
-            SCHEDULE
-          </Link>
-          <Link href="/venue" className="hover:text-[#CCFF00]">
-            VENUE
-          </Link>
-          <Link href="/contact" className="hover:text-[#CCFF00]">
-            CONTACT US
+
+          <Link href="/events" className="hover:text-[#CCFF00]">
+            SPEAKER
           </Link>
           <Link href="https://instagram.com" className="text-[#CCFF00]">
             <Instagram className="h-6 w-6" />
