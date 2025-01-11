@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { Instagram, Menu, X } from "lucide-react";
 import { useState } from "react";
@@ -16,7 +17,16 @@ export function Navbar() {
             HOME
           </Link>
 
-          <Link href="/events" className="hover:text-[#CCFF00]">
+          <Link
+            href="#event"
+            className="hover:text-[#CCFF00]"
+            onClick={() =>
+              window.scrollTo({
+                top: document.getElementById("event").offsetTop,
+                behavior: "smooth",
+              })
+            }
+          >
             EVENTS
           </Link>
 
@@ -45,7 +55,16 @@ export function Navbar() {
             HOME
           </Link>
 
-          <Link href="/events" className="hover:text-[#CCFF00]">
+          <Link
+            href="/events"
+            className="hover:text-[#CCFF00]"
+            onClick={() =>
+              window.scrollTo({
+                top: document.getElementById("event").offsetTop,
+                behavior: "smooth",
+              })
+            }
+          >
             EVENTS
           </Link>
 

@@ -12,7 +12,7 @@ export function Hero() {
   });
 
   useEffect(() => {
-    const eventDate = new Date("2025-01-31T00:00:00");
+    const eventDate = new Date("2025-01-30T00:00:00");
     const timer = setInterval(() => {
       const currentDate = new Date();
       const timeDifference = eventDate.getTime() - currentDate.getTime();

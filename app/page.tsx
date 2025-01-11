@@ -9,8 +9,7 @@ import Footer from "./components/footer";
 
 export default function page() {
   return (
-    <div className="min-h-screen flex flex-col">
-      
+    <div className="min-h-screen flex flex-col overflow-hidden">
       <Navbar />
       <Hero />
       <TicketSection />
@@ -20,4 +19,3 @@ export default function page() {
     </div>
   );
 }
-
