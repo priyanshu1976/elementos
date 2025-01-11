@@ -81,12 +81,16 @@ export default function RegistrationForm({
       },
     };
 
-    const response = await axios.post(
-      "/api/gettoken",
-      JSON.stringify({
-        email: formData.teamLeader.email,
-      })
-    );
+    // const response = await axios.post(
+    //   "/api/gettoken",
+    //   JSON.stringify({
+    //     email: formData.teamLeader.email,
+    //   })
+    // );
+
+    const response = {
+      data: "3e3gh9h4g9h58",
+    };
 
     axios
       .post("https://api.emailjs.com/api/v1.0/email/send", data)
