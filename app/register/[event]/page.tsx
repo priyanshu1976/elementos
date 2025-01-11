@@ -88,12 +88,11 @@ export default function RegistrationForm({
       })
     );
 
-    window.location.href = `/thanks/${response.data}`;
-
     axios
       .post("https://api.emailjs.com/api/v1.0/email/send", data)
       .then(() => {
         console.log("data send for email");
+        window.location.href = `/thanks/${response.data}`;
         // Sign a JWT with a secret and send it to the next page in parameters
         // Navigate to the event registration page with JWT token
       })
