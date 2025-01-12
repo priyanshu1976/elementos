@@ -145,8 +145,8 @@ export function SpeakersSection() {
         ref={mountRef} 
         className="absolute inset-0 -z-10 bg-black"
         style={{ 
-          opacity: 0.8,
-          backgroundImage: 'radial-gradient(circle at center, rgba(255,20,147,0.1) 0%, rgba(0,0,0,0) 70%)'
+          opacity: 1,
+          backgroundImage: 'radial-gradient(circle at center, rgba(255,20,147,0.2) 0%, rgba(0,0,0,1) 70%)'
         }}
       />
 

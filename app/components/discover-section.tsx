@@ -1,7 +1,7 @@
+import { useState, useEffect, useCallback, useRef } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import { ArrowLeft, ArrowRight } from "lucide-react"
-import { useState, useEffect, useCallback, useRef } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
@@ -109,12 +109,10 @@ export function DiscoverSection() {
   }, [handleMouseMove])
 
   return (
-    <div className="w-full relative overflow-hidden" id="event">
-      {/* Background Effects */}
+    <div className="w-full h-full relative overflow-hidden" id="event">
       <div className="absolute inset-0 bg-grid-pattern opacity-5" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#FF2D78]/5 to-transparent" />
       
-      {/* Floating Shapes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(5)].map((_, i) => (
           <div
@@ -131,7 +129,6 @@ export function DiscoverSection() {
         ))}
       </div>
 
-      {/* Squid Game Character */}
       <div 
         ref={characterRef}
         className="fixed bottom-8 right-8 z-50"
@@ -154,72 +151,27 @@ export function DiscoverSection() {
             }`}
             priority
           />
-          {/* Character Glow Effect */}
-          <div className={`absolute inset-0 bg-[#FF2D78] rounded-full blur-xl opacity-0 transition-opacity duration-300 ${
-            isHovering ? 'opacity-20' : ''
-          }`} />
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-8 md:py-16 relative">
-        <h2 className="text-3xl md:text-5xl font-bold mb-8 md:mb-12 text-[#FF2D78] font-['Roboto_Mono'] text-center relative">
-          <span className="relative">
-            ENTER THE EVENTS
-            <div className="absolute -inset-x-6 -inset-y-3 bg-[#FF2D78]/10 blur-xl -z-10" />
-          </span>
-        </h2>
-      </div>
-      
-      <div className="relative">
-        {/* Carousel Container */}
+      <div className="container mx-auto px-4 py-16">
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex">
             {events.map((event, index) => (
               <div className="flex-[0_0_100%] min-w-0" key={index}>
-                <div className="container mx-auto px-4">
-                  <Card
-                    desc={event.description}
-                    title={event.title}
-                    date={event.date}
-                    eventName={event.eventName}
-                  />
-                </div>
+                <Card
+                  title={event.title}
+                  date={event.date}
+                  desc={event.description}
+                  eventName={event.eventName}
+                />
               </div>
             ))}
           </div>
         </div>
-
-        {/* Navigation Buttons */}
-        <div className="container mx-auto px-4 relative">
-          <button
-            className="absolute left-8 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/75 p-3 rounded-full"
-            onClick={scrollPrev}
-          >
-            <ArrowLeft className="h-6 w-6" />
-          </button>
-          <button
-            className="absolute right-8 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/75 p-3 rounded-full"
-            onClick={scrollNext}
-          >
-            <ArrowRight className="h-6 w-6" />
-          </button>
-        </div>
-
-        {/* Dots Navigation */}
-        <div className="flex justify-center gap-2 mt-4">
-          {scrollSnaps.map((_, index) => (
-            <button
-              key={index}
-              className={`w-2 h-2 rounded-full transition-all ${
-                index === selectedIndex ? 'bg-[#CCFF00] w-6' : 'bg-gray-400'
-              }`}
-              onClick={() => emblaApi?.scrollTo(index)}
-            />
-          ))}
-        </div>
       </div>
     </div>
-  );
+  )
 }
 
 export default DiscoverSection;
@@ -238,30 +190,55 @@ function Card({
   const router = useRouter();
 
   return (
-    <div className="bg-[#1A1B35] rounded-2xl p-8 md:p-12 max-w-4xl mx-auto border-2 border-[#FF2D78] relative overflow-hidden shadow-[0_0_15px_rgba(255,45,120,0.3)] hover:shadow-[0_0_30px_rgba(255,45,120,0.5)] transition-all duration-500 group">
-      {/* Enhanced geometric shapes */}
-      <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full border-4 border-[#00FFD1] opacity-20 group-hover:scale-150 group-hover:rotate-180 transition-all duration-700" />
-      <div className="absolute -bottom-4 -left-4 w-16 h-16 rotate-45 border-4 border-[#FF2D78] opacity-20 group-hover:scale-150 group-hover:-rotate-180 transition-all duration-700" />
-      
-      {/* Content */}
-      <div className="space-y-4 relative z-10">
-        <div className="inline-block px-4 py-1 rounded-full bg-[#FF2D78]/10 text-[#FF2D78] border border-[#FF2D78]/30 backdrop-blur-sm group-hover:bg-[#FF2D78]/20 transition-all duration-300">
-          {date}
+    <div className="bg-[#1A1B35] rounded-3xl p-10 md:p-16 max-w-5xl mx-auto border-4 border-[#FF2D78] relative overflow-hidden shadow-[0_0_30px_rgba(255,45,120,0.4)] hover:shadow-[0_0_50px_rgba(255,45,120,0.6)] transition-all duration-500 group">
+      <div className="absolute -top-4 -right-4 transform rotate-12 z-20">
+        <div className="relative">
+          <div className="absolute inset-0 bg-[#FF2D78] blur-xl opacity-50 rounded-full" />
+          <div className="relative bg-[#FF2D78] text-white w-32 h-32 rounded-full border-2 border-white/20 flex flex-col items-center justify-center">
+            <span className="font-black text-4xl leading-none mb-1">{date.split(' ')[1]}</span>
+            <span className="font-bold text-sm uppercase">{date.split(' ')[0]}</span>
+          </div>
         </div>
-        <h3 className="text-2xl md:text-3xl font-bold text-white font-['Roboto_Mono'] group-hover:text-[#FF2D78] transition-colors duration-300">{title}</h3>
-        <p className="text-[#00FFD1] text-lg opacity-80 group-hover:opacity-100 transition-opacity duration-300">{desc}</p>
+      </div>
+
+      <div className="absolute inset-0 bg-gradient-to-br from-[#FF2D78]/5 via-transparent to-[#00FFD1]/5" />
+      <div className="absolute inset-0 opacity-20 bg-[url('/noise.png')] mix-blend-overlay" />
+      
+      <div className="space-y-8 relative z-10">
+        <h3 className="text-4xl md:text-6xl font-black text-white font-['Roboto_Mono'] group-hover:text-[#FF2D78] transition-colors duration-300 leading-tight">
+          {title}
+          <div className="absolute -inset-x-6 -inset-y-3 bg-[#FF2D78]/10 blur-xl -z-10 group-hover:bg-[#FF2D78]/20 transition-all duration-300" />
+        </h3>
         
-        {/* Enhanced button */}
+        <p className="text-[#00FFD1] text-xl md:text-2xl opacity-90 group-hover:opacity-100 transition-opacity duration-300 font-medium border-l-4 border-[#00FFD1] pl-6">
+          {desc}
+        </p>
+        
         <button
-          className="group/btn bg-[#FF2D78] text-white px-8 py-4 rounded-lg font-bold flex items-center gap-2 hover:bg-[#00FFD1] hover:text-black transition-all duration-300 mt-6 border-2 border-transparent hover:border-[#FF2D78] relative overflow-hidden"
-          onClick={() => {
-            router.push(`/register/${eventName}`);
-          }}
+          onClick={() => router.push(`/register/${eventName}`)}
+          className="group/btn relative w-full sm:w-auto"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000" />
-          <span className="relative z-10">ENTER GAME</span>
-          <ArrowRight className="h-5 w-5 group-hover/btn:translate-x-1 transition-transform relative z-10" />
+          <div className="absolute inset-0 bg-[#FF2D78] transform skew-x-6 rounded-xl transition-all duration-300 group-hover/btn:bg-[#00FFD1] blur-lg opacity-50" />
+          <div className="relative bg-[#FF2D78] text-white text-3xl font-black px-12 py-6 rounded-xl transform -skew-x-6 transition-all duration-300 group-hover/btn:bg-[#00FFD1] group-hover/btn:text-black group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 flex items-center justify-center gap-4 border-2 border-white/20">
+            ENTER GAME
+            <ArrowRight className="h-8 w-8 group-hover/btn:translate-x-2 transition-transform" />
+          </div>
         </button>
+      </div>
+
+      <div className="absolute top-0 left-0 w-24 h-24 border-t-4 border-l-4 border-[#FF2D78]/20" />
+      <div className="absolute bottom-0 right-0 w-24 h-24 border-b-4 border-r-4 border-[#00FFD1]/20" />
+      
+      <div className="absolute top-0 right-0 w-32 h-32 overflow-hidden opacity-10">
+        {[...Array(5)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute h-px bg-white/50 w-full"
+            style={{
+              transform: `rotate(45deg) translateY(${i * 8}px)`,
+            }}
+          />
+        ))}
       </div>
     </div>
   );
