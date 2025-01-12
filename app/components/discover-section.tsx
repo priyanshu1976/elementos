@@ -88,7 +88,10 @@ export function DiscoverSection() {
     onSelect()
     setScrollSnaps(emblaApi.scrollSnapList())
     emblaApi.on('select', onSelect)
-    return () => emblaApi.off('select', onSelect)
+    
+    return () => {
+      if (emblaApi) emblaApi.off('select', onSelect)
+    }
   }, [emblaApi, onSelect])
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
