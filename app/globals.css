@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-<<<<<<< HEAD
+
 html, body {
   width: 100%;
   height: 100%;
@@ -18,7 +18,7 @@ html, body {
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap');
->>>>>>> fcfdb5755c47fc6bb636506406e4bd1bfc359135
+
 
 :root {
   --foreground-rgb: 255, 255, 255;
