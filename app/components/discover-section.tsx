@@ -88,7 +88,10 @@ export function DiscoverSection() {
     onSelect()
     setScrollSnaps(emblaApi.scrollSnapList())
     emblaApi.on('select', onSelect)
-    return () => emblaApi.off('select', onSelect)
+    
+    return () => {
+      if (emblaApi) emblaApi.off('select', onSelect)
+    }
   }, [emblaApi, onSelect])
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
@@ -106,7 +109,7 @@ export function DiscoverSection() {
   }, [handleMouseMove])
 
   return (
-    <div className="w-full relative overflow-hidden" id="event">
+    <div className="w-full h-full relative overflow-hidden" id="event">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-grid-pattern opacity-5" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#FF2D78]/5 to-transparent" />

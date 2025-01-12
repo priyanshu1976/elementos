@@ -52,59 +52,55 @@ export function Hero() {
 
   return (
     <div
-      className="container mx-auto px-4 py-8 md:py-16 relative overflow-hidden"
+      className="container mx-auto px-4 py-4 md:py-8 relative overflow-hidden min-h-screen flex flex-col items-center justify-center"
       style={{
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/bg.jpg')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        textAlign: "center",
       }}
     >
-      {/* Three.js Mount Point */}
       <div ref={mountRef} className="absolute inset-0 pointer-events-none z-0"></div>
 
-      {/* Logo Image */}
-      <div className="mb-16 mt-[-100px] animate-fade-in relative group z-10">
-        <div className="absolute inset-0 animate-pulse bg-pink-500/20 blur-3xl -z-10"></div>
-        <img
-          src="/newele.png"
-          alt="Event Logo"
-          className="w-[500px] md:w-[700px] lg:w-[1000px] mx-auto hover:scale-105 transition-transform duration-300 drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]"
-        />
-      </div>
+      {/* Logo and Timer Container */}
+      <div className="flex flex-col items-center z-10 mt-16 md:mt-20">
+        {/* Logo Image */}
+        <div className="relative group">
+          <div className="absolute inset-0 animate-pulse bg-pink-500/20 blur-3xl -z-10"></div>
+          <img
+            src="/newele.png"
+            alt="Event Logo"
+            className="w-[400px] md:w-[600px] lg:w-[800px] mx-auto hover:scale-105 transition-transform duration-300 drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]"
+          />
+        </div>
 
-      {/* Timer */}
-      <div className="flex gap-6 md:gap-12 mb-8 text-white z-10">
-        {[
-          { value: countdown.days, label: "DAYS" },
-          { value: countdown.hours, label: "HOURS" },
-          { value: countdown.minutes, label: "MINUTES" },
-          { value: countdown.seconds, label: "SECONDS" },
-        ].map((item, index) => (
-          <div key={index} className="relative group">
-            <div className="absolute inset-0 bg-pink-500/5 scale-0 group-hover:scale-100 transition-transform duration-300 rounded-lg"></div>
-            <div className="text-4xl md:text-6xl font-bold font-mono tracking-wider group-hover:text-pink-500 transition-colors animate-[pulse_1s_ease-in-out_infinite]">
-              {String(item.value).padStart(2, '0')}
+        {/* Timer */}
+        <div className="flex gap-4 md:gap-8 text-white -mt-20 md:-mt-28 lg:-mt-36">
+          {[
+            { value: countdown.days, label: "DAYS" },
+            { value: countdown.hours, label: "HOURS" },
+            { value: countdown.minutes, label: "MINUTES" },
+            { value: countdown.seconds, label: "SECONDS" },
+          ].map((item, index) => (
+            <div key={index} className="relative group">
+              <div className="absolute inset-0 bg-pink-500/5 scale-0 group-hover:scale-100 transition-transform duration-300 rounded-lg"></div>
+              <div className="text-lg md:text-xl lg:text-2xl font-bold font-mono tracking-wider group-hover:text-pink-500 transition-colors animate-[pulse_1s_ease-in-out_infinite]">
+                {String(item.value).padStart(2, '0')}
+              </div>
+              <div className="text-[10px] md:text-xs lg:text-sm text-pink-200">{item.label}</div>
             </div>
-            <div className="text-base md:text-lg text-pink-200">{item.label}</div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       {/* Button */}
       <button 
-        className="relative bg-pink-500 text-white px-8 md:px-10 py-4 rounded-lg font-bold flex items-center gap-2 hover:bg-pink-600 transition-all hover:scale-105 shadow-[0_0_15px_rgba(236,72,153,0.5)] group overflow-hidden z-10"
+        className="relative bg-pink-500 text-white px-6 md:px-8 py-3 md:py-4 rounded-lg font-bold flex items-center gap-2 hover:bg-pink-600 transition-all hover:scale-105 shadow-[0_0_15px_rgba(236,72,153,0.5)] group overflow-hidden z-10 mt-8 md:mt-12"
       >
         <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></span>
-        <Play className="h-5 w-5" />
+        <Play className="h-4 w-4 md:h-5 md:w-5" />
         JOIN THE GAME
-        <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+        <ArrowRight className="h-4 w-4 md:h-5 md:w-5 group-hover:translate-x-1 transition-transform" />
       </button>
     </div>
   );
