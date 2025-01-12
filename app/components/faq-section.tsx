@@ -80,12 +80,12 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 export function FAQSection() {
   return (
     <section id="faq" className="container mx-auto px-4 py-16 md:py-24">
-      <motion.div
+      {/* <motion.div
         className="max-w-4xl mx-auto"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-      >
+      > */}
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Frequently Asked
@@ -101,7 +101,7 @@ export function FAQSection() {
             <FAQItem key={index} question={faq.question} answer={faq.answer} />
           ))}
         </div>
-      </motion.div>
+      {/* </motion.div> */}
     </section>
   );
 }

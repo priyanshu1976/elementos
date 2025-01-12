@@ -9,13 +9,14 @@ html, body {
   margin: 0; /* Remove default margin */
   padding: 0; /* Remove default padding */
   overflow-x: hidden; /* Prevent horizontal scroll */
+  
 }
 
 #event {
   width: 100vw; /* Full viewport width */
   height: 100vh; /* Full viewport height */
 }
-=======
+
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap');
 >>>>>>> fcfdb5755c47fc6bb636506406e4bd1bfc359135
 

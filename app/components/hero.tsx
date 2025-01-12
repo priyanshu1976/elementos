@@ -127,14 +127,14 @@ export function Hero() {
     <div
       className="container mx-auto px-4 py-4 md:py-8 relative overflow-hidden min-h-screen flex flex-col items-center justify-center"
       style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/bg.jpg')`,
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.8)), url('/bg.jpg')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
     >
       {/* Three.js Background */}
-      <div ref={mountRef} className="absolute inset-0 pointer-events-none z-0"></div>
+      {/* <div ref={mountRef} className="absolute inset-0 pointer-events-none z-0"></div> */}
 
       {/* Left Side Decorative Elements */}
       <div className="absolute left-0 inset-y-0 w-32 pointer-events-none">
@@ -161,7 +161,7 @@ export function Hero() {
       </div>
 
       {/* Left Side Guards */}
-      <div className="absolute left-10 inset-y-0 flex flex-col justify-center gap-8 pointer-events-none">
+      {/* <div className="absolute left-10 inset-y-0 flex flex-col justify-center gap-8 pointer-events-none">
         <motion.div
           initial={{ x: -100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
@@ -179,10 +179,10 @@ export function Hero() {
             />
           </div>
         </motion.div>
-      </div>
+      </div> */}
 
       {/* Right Side Guards */}
-      <div className="absolute right-10 inset-y-0 flex flex-col justify-center gap-8 pointer-events-none">
+      {/* <div className="absolute right-10 inset-y-0 flex flex-col justify-center gap-8 pointer-events-none">
         <motion.div
           initial={{ x: 100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
@@ -200,7 +200,7 @@ export function Hero() {
             />
           </div>
         </motion.div>
-      </div>
+      </div> */}
 
       {/* Add floating particles */}
       <div className="absolute inset-0 pointer-events-none">
@@ -232,19 +232,19 @@ export function Hero() {
       </div>
 
       {/* Logo and Timer Container */}
-      <div className="flex flex-col items-center z-10 mt-16 md:mt-20">
+      <div className="  scale-125 flex flex-col items-center z-10 mt-16 md:mt-20">
         {/* Logo Image */}
         <div className="relative group">
           <div className="absolute inset-0 animate-pulse bg-pink-500/20 blur-3xl -z-10"></div>
           <img
             src="/newele.png"
             alt="Event Logo"
-            className="w-[400px] md:w-[600px] lg:w-[800px] mx-auto hover:scale-105 transition-transform duration-300 drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]"
+            className="w-[500px] md:w-[600px] lg:w-[800px] mx-auto hover:scale-105 transition-transform duration-300 drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]"
           />
         </div>
 
         {/* Timer */}
-        <div className="flex gap-4 md:gap-8 text-white -mt-20 md:-mt-28 lg:-mt-36">
+        <div className="flex gap-4 md:gap-8 text-white -mt-20 md:-mt-28 lg:-mt-12">
           {[
             { value: countdown.days, label: "DAYS" },
             { value: countdown.hours, label: "HOURS" },
