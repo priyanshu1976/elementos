@@ -84,7 +84,7 @@ export function DiscoverSection() {
   }, [emblaApi])
 
   useEffect(() => {
-    if (!emblaApi) return
+    if (!emblaApi) return undefined
     onSelect()
     setScrollSnaps(emblaApi.scrollSnapList())
     emblaApi.on('select', onSelect)
