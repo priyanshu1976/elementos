@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef } from "react";
 import { ArrowRight, Play } from "lucide-react";
 import * as THREE from "three";
+import { motion } from "framer-motion";
+import Image from 'next/image';
 
 export function Hero() {
   const [countdown, setCountdown] = useState({
@@ -21,17 +23,79 @@ export function Hero() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     mountRef.current?.appendChild(renderer.domElement);
 
-    camera.position.z = 10;
+    // Create Squid Game shapes for both sides
+    const shapes: THREE.Mesh[] = [];
+    const geometries = [
+      new THREE.CircleGeometry(0.8, 32),          // Circle
+      new THREE.BoxGeometry(1.2, 1.2, 0.1),       // Square
+      new THREE.ConeGeometry(0.8, 1.2, 3)         // Triangle
+    ];
 
-    // Add ambient light
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-    scene.add(ambientLight);
+    const materials = [
+      new THREE.MeshBasicMaterial({ 
+        color: 0xFF1493,  // Pink
+        wireframe: true,
+        transparent: true,
+        opacity: 0.6
+      }),
+      new THREE.MeshBasicMaterial({ 
+        color: 0x00FF00,  // Green
+        wireframe: true,
+        transparent: true,
+        opacity: 0.6
+      })
+    ];
+
+    // Create shapes for left and right sides
+    for (let side = -1; side <= 1; side += 2) { // -1 for left, 1 for right
+      for (let i = 0; i < 5; i++) {
+        const geometryIndex = i % geometries.length;
+        const materialIndex = i % materials.length;
+        
+        const shape = new THREE.Mesh(geometries[geometryIndex], materials[materialIndex]);
+        
+        // Position shapes on sides
+        shape.position.x = side * (8 + Math.random() * 2); // Spread on X axis
+        shape.position.y = (i - 2) * 3; // Spread vertically
+        shape.position.z = -5 + Math.random() * 2; // Vary depth
+
+        // Add animation properties
+        shape.userData = {
+          rotationSpeed: (Math.random() - 0.5) * 0.02,
+          floatSpeed: 0.005 + Math.random() * 0.005,
+          floatOffset: Math.random() * Math.PI * 2,
+          originalY: shape.position.y
+        };
+
+        shapes.push(shape);
+        scene.add(shape);
+      }
+    }
+
+    camera.position.z = 15;
 
     // Animation
-    const animate = function () {
+    let time = 0;
+    const animate = () => {
       requestAnimationFrame(animate);
+      time += 0.01;
+
+      shapes.forEach((shape) => {
+        // Rotation animation
+        shape.rotation.x += shape.userData.rotationSpeed;
+        shape.rotation.y += shape.userData.rotationSpeed;
+
+        // Floating animation
+        shape.position.y = shape.userData.originalY + Math.sin(time + shape.userData.floatOffset) * 1.5;
+        
+        // Subtle scale pulse
+        shape.scale.setScalar(1 + Math.sin(time * 2 + shape.userData.floatOffset) * 0.1);
+      });
+
       renderer.render(scene, camera);
     };
+
+    animate();
 
     // Handle window resize
     const handleResize = () => {
@@ -41,12 +105,21 @@ export function Hero() {
     };
 
     window.addEventListener('resize', handleResize);
-    animate();
 
     // Clean up
     return () => {
       window.removeEventListener('resize', handleResize);
       mountRef.current?.removeChild(renderer.domElement);
+      shapes.forEach(shape => {
+        scene.remove(shape);
+        shape.geometry.dispose();
+        if (Array.isArray(shape.material)) {
+          shape.material.forEach(m => m.dispose());
+        } else {
+          shape.material.dispose();
+        }
+      });
+      renderer.dispose();
     };
   }, []);
 
@@ -60,7 +133,103 @@ export function Hero() {
         backgroundRepeat: "no-repeat",
       }}
     >
+      {/* Three.js Background */}
       <div ref={mountRef} className="absolute inset-0 pointer-events-none z-0"></div>
+
+      {/* Left Side Decorative Elements */}
+      <div className="absolute left-0 inset-y-0 w-32 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-r from-pink-500/20 to-transparent"></div>
+        {[...Array(3)].map((_, i) => (
+          <div
+            key={`left-${i}`}
+            className="absolute w-px h-full bg-gradient-to-b from-transparent via-pink-500/30 to-transparent"
+            style={{ left: `${i * 12}px` }}
+          />
+        ))}
+      </div>
+
+      {/* Right Side Decorative Elements */}
+      <div className="absolute right-0 inset-y-0 w-32 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-l from-pink-500/20 to-transparent"></div>
+        {[...Array(3)].map((_, i) => (
+          <div
+            key={`right-${i}`}
+            className="absolute w-px h-full bg-gradient-to-b from-transparent via-pink-500/30 to-transparent"
+            style={{ right: `${i * 12}px` }}
+          />
+        ))}
+      </div>
+
+      {/* Left Side Guards */}
+      <div className="absolute left-10 inset-y-0 flex flex-col justify-center gap-8 pointer-events-none">
+        <motion.div
+          initial={{ x: -100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          className="relative w-48 h-48 md:w-64 md:h-64"
+        >
+          <div className="absolute inset-0 bg-[#FF1493] rounded-full opacity-20 blur-lg animate-pulse"></div>
+          <div className="relative w-full h-full">
+            <Image
+              src="/gaurd.png"
+              alt="Squid Game Guards"
+              width={256}
+              height={256}
+              className="w-full h-full object-contain"
+            />
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Right Side Guards */}
+      <div className="absolute right-10 inset-y-0 flex flex-col justify-center gap-8 pointer-events-none">
+        <motion.div
+          initial={{ x: 100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          className="relative w-48 h-48 md:w-64 md:h-64"
+        >
+          <div className="absolute inset-0 bg-[#FF1493] rounded-full opacity-20 blur-lg animate-pulse"></div>
+          <div className="relative w-full h-full">
+            <Image
+              src="/gaurd.png"
+              alt="Squid Game Guards"
+              width={256}
+              height={256}
+              className="w-full h-full object-contain transform scale-x-[-1]"
+            />
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Add floating particles */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={`particle-${i}`}
+            initial={{ 
+              x: Math.random() * window.innerWidth,
+              y: Math.random() * window.innerHeight,
+              scale: 0
+            }}
+            animate={{ 
+              y: [null, Math.random() * -500],
+              scale: [0, 1, 0],
+            }}
+            transition={{ 
+              duration: 5 + Math.random() * 5,
+              repeat: Infinity,
+              repeatType: "loop"
+            }}
+            className="absolute w-2 h-2 rounded-full"
+            style={{
+              background: i % 2 === 0 ? '#FF1493' : '#00FF00',
+              opacity: 0.3,
+              filter: 'blur(2px)'
+            }}
+          />
+        ))}
+      </div>
 
       {/* Logo and Timer Container */}
       <div className="flex flex-col items-center z-10 mt-16 md:mt-20">
