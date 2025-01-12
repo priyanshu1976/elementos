@@ -69,7 +69,7 @@ export function Navbar() {
                 <span className="text-white group-hover:text-[#FF0B7B] transition-colors duration-300 drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
                   ELEMENTOS
                 </span>
-                <span className="text-white ml-1 group-hover:text-[#00F0FF] transition-colors duration-300 drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
+                <span className="text-white ml-1 group-hover:text-[#075b61] transition-colors duration-300 drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
                   9.O
                 </span>
               </h1>

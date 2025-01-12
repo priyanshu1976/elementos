@@ -63,7 +63,7 @@ export function Footer() {
                   src="/newele.png"
                   alt="ELEMENTOS Logo"
                   fill
-                  className="object-contain group-hover:scale-105 transition-transform duration-300"
+                  className="object-contain group-hover:scale-200 transition-transform duration-300 scale-150"
                   priority
                 />
               </motion.div>
