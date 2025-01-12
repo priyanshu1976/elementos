@@ -8,20 +8,40 @@ const faqs = [
     answer: "Elementos 9.0 is IETE Students' Forum's flagship technical event that brings together technology enthusiasts, developers, and innovators for a series of competitions, workshops, and networking opportunities."
   },
   {
-    question: "How can I register for the events?",
-    answer: "You can register for individual events through our registration portal. Click on the 'Register' button for the specific event you're interested in, and follow the registration process."
+    question: "When and where will Elementos 9.0 take place?",
+    answer: "Elementos 9.0 will be held at Thapar Institute of Engineering & Technology, Patiala. The exact dates and venue details will be announced soon."
   },
   {
-    question: "Are there any prerequisites for participating?",
-    answer: "Prerequisites vary by event. While some events are open to all, others might require specific technical knowledge or skills. Check individual event details for specific requirements."
+    question: "How can I register for Elementos 9.0?",
+    answer: "You can register for individual events through our registration portal. Complete details about the registration process will be shared on our website."
   },
   {
-    question: "Is there a registration fee?",
-    answer: "Registration fees vary by event. Some events are free, while others may have a nominal fee. Early bird discounts are available for certain events."
+    question: "Can I participate in more than one event?",
+    answer: "Yes, you can participate in multiple events. Just ensure that the event timings don't overlap and register separately for each event you wish to participate in."
   },
   {
-    question: "Will I get a certificate?",
-    answer: "Yes, all participants will receive digital certificates. Winners and runners-up will receive special recognition certificates and prizes."
+    question: "Is there a registration fee for participating?",
+    answer: "Registration fees vary by event. Some events are free, while others may have a nominal fee. Early bird discounts may be available for certain events."
+  },
+  {
+    question: "Who can participate in Elementos 9.0?",
+    answer: "Elementos 9.0 is open to all college students. Some events may have specific eligibility criteria, which will be mentioned in the event details."
+  },
+  {
+    question: "Will there be certificates for participation or winners?",
+    answer: "Yes, all participants will receive digital certificates of participation. Winners and runners-up will receive special recognition certificates and prizes."
+  },
+  {
+    question: "How will I know the schedule for the events?",
+    answer: "A detailed schedule of all events will be shared on our website and social media channels. Registered participants will also receive updates via email."
+  },
+  {
+    question: "What should I bring to the event?",
+    answer: "Required materials vary by event. Basic requirements include your college ID, registration confirmation, and any specific tools mentioned in the event guidelines."
+  },
+  {
+    question: "How do I contact the organizers in case of queries?",
+    answer: "You can reach out to us through our email at iete_sc@thapar.edu or through our social media channels. Our team will respond to your queries promptly."
   }
 ];
 

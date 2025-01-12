@@ -221,11 +221,13 @@ export function SpeakersSection() {
                   {/* Profile image container - Simplified */}
                   <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-[#FF0B7B]/50 transform transition-all duration-300 group-hover:scale-110 relative z-10">
                     <Image
-                      src={speaker.image}
+                      src="/speakers/yash.webp"
                       alt={speaker.name}
                       width={128}
                       height={128}
                       className="object-cover w-full h-full transform transition-transform duration-500 group-hover:scale-110"
+                      placeholder="blur"
+                      blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRg..."
                     />
                   </div>
                 </motion.div>
