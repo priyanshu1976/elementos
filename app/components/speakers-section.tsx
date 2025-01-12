@@ -139,7 +139,7 @@ export function SpeakersSection() {
   ]
 
   return (
-    <div className="relative bg-black">
+    <section id="speakers" className="relative bg-black">
       {/* Three.js canvas container */}
       <div 
         ref={mountRef} 
@@ -304,7 +304,7 @@ export function SpeakersSection() {
           ))}
         </div>
       </motion.div>
-    </div>
+    </section>
   );
 }
 

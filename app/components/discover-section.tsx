@@ -109,7 +109,7 @@ export function DiscoverSection() {
   }, [handleMouseMove])
 
   return (
-    <div className="w-full h-full relative overflow-hidden" id="event">
+    <section id="events" className="w-full h-full relative overflow-hidden">
       <div className="absolute inset-0 bg-grid-pattern opacity-5" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#FF2D78]/5 to-transparent" />
       
@@ -170,7 +170,7 @@ export function DiscoverSection() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 

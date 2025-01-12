@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap');
 
 :root {
   --foreground-rgb: 255, 255, 255;
@@ -17,6 +18,7 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  font-family: 'Orbitron', sans-serif;
 }
 
 @layer utilities {
