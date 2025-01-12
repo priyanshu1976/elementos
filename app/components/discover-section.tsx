@@ -235,30 +235,68 @@ function Card({
   const router = useRouter();
 
   return (
-    <div className="bg-[#1A1B35] rounded-2xl p-8 md:p-12 max-w-4xl mx-auto border-2 border-[#FF2D78] relative overflow-hidden shadow-[0_0_15px_rgba(255,45,120,0.3)] hover:shadow-[0_0_30px_rgba(255,45,120,0.5)] transition-all duration-500 group">
-      {/* Enhanced geometric shapes */}
-      <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full border-4 border-[#00FFD1] opacity-20 group-hover:scale-150 group-hover:rotate-180 transition-all duration-700" />
-      <div className="absolute -bottom-4 -left-4 w-16 h-16 rotate-45 border-4 border-[#FF2D78] opacity-20 group-hover:scale-150 group-hover:-rotate-180 transition-all duration-700" />
-      
-      {/* Content */}
-      <div className="space-y-4 relative z-10">
-        <div className="inline-block px-4 py-1 rounded-full bg-[#FF2D78]/10 text-[#FF2D78] border border-[#FF2D78]/30 backdrop-blur-sm group-hover:bg-[#FF2D78]/20 transition-all duration-300">
-          {date}
+    <div className="bg-[#1A1B35] rounded-3xl p-10 md:p-16 max-w-5xl mx-auto border-4 border-[#FF2D78] relative overflow-hidden shadow-[0_0_30px_rgba(255,45,120,0.4)] hover:shadow-[0_0_50px_rgba(255,45,120,0.6)] transition-all duration-500 group">
+      {/* Circular Date Badge */}
+      <div className="absolute -top-4 -right-4 transform rotate-12 z-20">
+        <div className="relative">
+          {/* Glow effect */}
+          <div className="absolute inset-0 bg-[#FF2D78] blur-xl opacity-50 rounded-full" />
+          {/* Main circular badge */}
+          <div className="relative bg-[#FF2D78] text-white w-32 h-32 rounded-full border-2 border-white/20 flex flex-col items-center justify-center">
+            {/* Mask Icon */}
+            {/* <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg">
+              <div className="w-7 h-7 bg-[#FF2D78]" style={{ maskImage: "url('/mask-icon.svg')" }} />
+            </div> */}
+            {/* Date Text */}
+            <span className="font-black text-4xl leading-none mb-1">{date.split(' ')[1]}</span>
+            <span className="font-bold text-sm uppercase">{date.split(' ')[0]}</span>
+          </div>
         </div>
-        <h3 className="text-2xl md:text-3xl font-bold text-white font-['Roboto_Mono'] group-hover:text-[#FF2D78] transition-colors duration-300">{title}</h3>
-        <p className="text-[#00FFD1] text-lg opacity-80 group-hover:opacity-100 transition-opacity duration-300">{desc}</p>
+      </div>
+
+      {/* Glowing Background Effect */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#FF2D78]/5 via-transparent to-[#00FFD1]/5" />
+      <div className="absolute inset-0 opacity-20 bg-[url('/noise.png')] mix-blend-overlay" />
+      
+      {/* Content with enhanced comic styling */}
+      <div className="space-y-8 relative z-10">
+        <h3 className="text-4xl md:text-6xl font-black text-white font-['Roboto_Mono'] group-hover:text-[#FF2D78] transition-colors duration-300 leading-tight">
+          {title}
+          <div className="absolute -inset-x-6 -inset-y-3 bg-[#FF2D78]/10 blur-xl -z-10 group-hover:bg-[#FF2D78]/20 transition-all duration-300" />
+        </h3>
         
-        {/* Enhanced button */}
+        <p className="text-[#00FFD1] text-xl md:text-2xl opacity-90 group-hover:opacity-100 transition-opacity duration-300 font-medium border-l-4 border-[#00FFD1] pl-6">
+          {desc}
+        </p>
+        
+        {/* Squid Game-styled button */}
         <button
-          className="group/btn bg-[#FF2D78] text-white px-8 py-4 rounded-lg font-bold flex items-center gap-2 hover:bg-[#00FFD1] hover:text-black transition-all duration-300 mt-6 border-2 border-transparent hover:border-[#FF2D78] relative overflow-hidden"
-          onClick={() => {
-            router.push(`/register/${eventName}`);
-          }}
+          onClick={() => router.push(`/register/${eventName}`)}
+          className="group/btn relative w-full sm:w-auto"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000" />
-          <span className="relative z-10">ENTER GAME</span>
-          <ArrowRight className="h-5 w-5 group-hover/btn:translate-x-1 transition-transform relative z-10" />
+          <div className="absolute inset-0 bg-[#FF2D78] transform skew-x-6 rounded-xl transition-all duration-300 group-hover/btn:bg-[#00FFD1] blur-lg opacity-50" />
+          <div className="relative bg-[#FF2D78] text-white text-3xl font-black px-12 py-6 rounded-xl transform -skew-x-6 transition-all duration-300 group-hover/btn:bg-[#00FFD1] group-hover/btn:text-black group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 flex items-center justify-center gap-4 border-2 border-white/20">
+            ENTER GAME
+            <ArrowRight className="h-8 w-8 group-hover/btn:translate-x-2 transition-transform" />
+          </div>
         </button>
+      </div>
+
+      {/* Squid Game-inspired decorative elements */}
+      <div className="absolute top-0 left-0 w-24 h-24 border-t-4 border-l-4 border-[#FF2D78]/20" />
+      <div className="absolute bottom-0 right-0 w-24 h-24 border-b-4 border-r-4 border-[#00FFD1]/20" />
+      
+      {/* Diagonal lines */}
+      <div className="absolute top-0 right-0 w-32 h-32 overflow-hidden opacity-10">
+        {[...Array(5)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute h-px bg-white/50 w-full"
+            style={{
+              transform: `rotate(45deg) translateY(${i * 8}px)`,
+            }}
+          />
+        ))}
       </div>
     </div>
   );
