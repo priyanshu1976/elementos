@@ -3,6 +3,7 @@ import { useParams } from "next/navigation";
 
 export default function ThanksPage() {
   const params = useParams<{ token: string }>();
+  console.log(params.token);
 
   return (
     <div className="bg-[#1a1f2e] min-h-screen flex items-center justify-center p-4">

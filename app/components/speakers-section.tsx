@@ -1,8 +1,8 @@
-import { useEffect, useRef } from 'react';
-import * as THREE from 'three';
-import Image from 'next/image'
-import { FaLinkedin } from 'react-icons/fa'
-import { motion } from 'framer-motion'
+import { useEffect, useRef } from "react";
+import * as THREE from "three";
+import Image from "next/image";
+import { FaLinkedin } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 export function SpeakersSection() {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -11,7 +11,12 @@ export function SpeakersSection() {
     if (!mountRef.current) return;
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      1000
+    );
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     mountRef.current.appendChild(renderer.domElement);
@@ -21,22 +26,22 @@ export function SpeakersSection() {
     const geometries = [
       new THREE.CircleGeometry(0.5, 32),
       new THREE.BoxGeometry(0.8, 0.8, 0.8),
-      new THREE.ConeGeometry(0.5, 0.8, 3) // Triangle
+      new THREE.ConeGeometry(0.5, 0.8, 3), // Triangle
     ];
 
     const materials = [
-      new THREE.MeshBasicMaterial({ 
-        color: 0xFFFFFF, 
+      new THREE.MeshBasicMaterial({
+        color: 0xffffff,
         wireframe: true,
         transparent: true,
-        opacity: 0.8
+        opacity: 0.8,
       }),
-      new THREE.MeshBasicMaterial({ 
-        color: 0xFF1493, 
+      new THREE.MeshBasicMaterial({
+        color: 0xff1493,
         wireframe: true,
         transparent: true,
-        opacity: 0.8
-      })
+        opacity: 0.8,
+      }),
     ];
 
     // Create more shapes in a larger grid
@@ -44,9 +49,12 @@ export function SpeakersSection() {
       for (let j = -10; j < 10; j++) {
         const geometryIndex = Math.floor(Math.random() * geometries.length);
         const materialIndex = Math.floor(Math.random() * materials.length);
-        
-        const shape = new THREE.Mesh(geometries[geometryIndex], materials[materialIndex]);
-        
+
+        const shape = new THREE.Mesh(
+          geometries[geometryIndex],
+          materials[materialIndex]
+        );
+
         // Position in grid with some randomization
         shape.position.x = i * 1.5 + (Math.random() - 0.5);
         shape.position.y = j * 1.5 + (Math.random() - 0.5);
@@ -61,7 +69,7 @@ export function SpeakersSection() {
           rotationSpeed: (Math.random() - 0.5) * 0.01,
           floatSpeed: Math.random() * 0.005,
           floatOffset: Math.random() * Math.PI * 2,
-          originalY: shape.position.y
+          originalY: shape.position.y,
         };
 
         shapes.push(shape);
@@ -83,7 +91,9 @@ export function SpeakersSection() {
         shape.rotation.y += shape.userData.rotationSpeed;
 
         // Floating animation
-        shape.position.y = shape.userData.originalY + Math.sin(time + shape.userData.floatOffset) * 0.3;
+        shape.position.y =
+          shape.userData.originalY +
+          Math.sin(time + shape.userData.floatOffset) * 0.3;
       });
 
       // Slowly rotate entire scene
@@ -102,17 +112,17 @@ export function SpeakersSection() {
       renderer.setSize(window.innerWidth, window.innerHeight);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     // Cleanup
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
       mountRef.current?.removeChild(renderer.domElement);
-      shapes.forEach(shape => {
+      shapes.forEach((shape) => {
         scene.remove(shape);
         shape.geometry.dispose();
         if (Array.isArray(shape.material)) {
-          shape.material.forEach(m => m.dispose());
+          shape.material.forEach((m) => m.dispose());
         } else {
           shape.material.dispose();
         }
@@ -125,32 +135,35 @@ export function SpeakersSection() {
     {
       name: "YASH AWIDRA",
       role: "Software Engineer@Mercedes-Benz | 200K+ @LinkedIn | Career & LinkedIn Coach | Stand-up comedian",
-      description: "A multifaceted professional, he excels as a Software Engineer at Mercedes-Benz, a Career & LinkedIn Coach, and a passionate advocate for personal branding. Also a Stand-up Comedian, Teacher, Public Speaker, and Author, he shares valuable insights on career growth and personal development with humor and authenticity.",
+      description:
+        "A multifaceted professional, he excels as a Software Engineer at Mercedes-Benz, a Career & LinkedIn Coach, and a passionate advocate for personal branding. Also a Stand-up Comedian, Teacher, Public Speaker, and Author, he shares valuable insights on career growth and personal development with humor and authenticity.",
       image: "/yash.jpg",
-      linkedin: "https://www.linkedin.com/in/yash-awidra-63a4b21a6/"
+      linkedin: "https://www.linkedin.com/in/yash-awidra-63a4b21a6/",
     },
     {
       name: "VIKRAM GAUR",
       role: "LinkedIn Top Voice '24 | Google Cloud Facilitator | SDE @ EY",
-      description: "Vikram Gaur is a LinkedIn Top Voice 2024, SDE at EY, and a Google Cloud Certified Engineer, blending expertise in cloud computing with a passion for tech communities. As a Google Cloud Facilitator and active member of GDG Indore and GirlScript Ireland, he inspires and empowers developers worldwide.",
+      description:
+        "Vikram Gaur is a LinkedIn Top Voice 2024, SDE at EY, and a Google Cloud Certified Engineer, blending expertise in cloud computing with a passion for tech communities. As a Google Cloud Facilitator and active member of GDG Indore and GirlScript Ireland, he inspires and empowers developers worldwide.",
       image: "/vikram.jpg",
-      linkedin: "https://www.linkedin.com/in/vikram-gaur-0252aa185/"
+      linkedin: "https://www.linkedin.com/in/vikram-gaur-0252aa185/",
     },
-  ]
+  ];
 
   return (
     <section id="speakers" className="relative bg-black">
       {/* Three.js canvas container */}
-      <div 
-        ref={mountRef} 
+      <div
+        ref={mountRef}
         className="absolute inset-0 -z-10 bg-black"
-        style={{ 
+        style={{
           opacity: 1,
-          backgroundImage: 'radial-gradient(circle at center, rgba(255,20,147,0.2) 0%, rgba(0,0,0,1) 70%)'
+          backgroundImage:
+            "radial-gradient(circle at center, rgba(255,20,147,0.2) 0%, rgba(0,0,0,1) 70%)",
         }}
       />
 
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
@@ -158,7 +171,7 @@ export function SpeakersSection() {
         className="container mx-auto px-4 py-16 md:py-24 relative"
       >
         <div className="text-center mb-12 md:mb-16">
-          <motion.h2 
+          <motion.h2
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
@@ -168,7 +181,7 @@ export function SpeakersSection() {
             Meet Our{" "}
             <span className="text-[#FF0B7B] relative">
               Speakers
-              <motion.div 
+              <motion.div
                 initial={{ width: 0 }}
                 whileInView={{ width: "100%" }}
                 viewport={{ once: true }}
@@ -177,14 +190,15 @@ export function SpeakersSection() {
               ></motion.div>
             </span>
           </motion.h2>
-          <motion.p 
+          <motion.p
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-gray-400 mt-4 text-lg max-w-2xl mx-auto"
           >
-            Learn from the best in the industry, with a touch of humor and expertise.
+            Learn from the best in the industry, with a touch of humor and
+            expertise.
           </motion.p>
         </div>
 
@@ -203,16 +217,16 @@ export function SpeakersSection() {
               <div className="absolute inset-0 bg-gradient-to-br from-[#1A1A1A] to-[#2D2D2D] transform transition-all duration-500 group-hover:scale-105">
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[#FF0B7B]/5"></div>
               </div>
-              
+
               {/* Animated Border Effect */}
               <div className="absolute inset-0 border-2 border-[#FF0B7B]/30 rounded-2xl">
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-[#FF0B7B]/0 via-[#FF0B7B]/20 to-[#FF0B7B]/0 animate-shimmer"></div>
               </div>
-              
+
               {/* Content Container */}
               <div className="relative p-8 rounded-2xl backdrop-blur-sm">
                 {/* Speaker Image with Animation - Removed glow effect */}
-                <motion.div 
+                <motion.div
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 0.5 }}
@@ -233,14 +247,14 @@ export function SpeakersSection() {
                 </motion.div>
 
                 {/* Speaker Info with Enhanced Animations */}
-                <motion.div 
+                <motion.div
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
                   className="text-center relative"
                 >
                   {/* Animated Name with Glow Effect */}
-                  <motion.h3 
+                  <motion.h3
                     whileHover={{ scale: 1.05 }}
                     className="text-2xl font-bold text-white mb-2 relative inline-block"
                   >
@@ -256,7 +270,7 @@ export function SpeakersSection() {
                   </motion.h3>
 
                   {/* Animated Role with Slide Effect */}
-                  <motion.p 
+                  <motion.p
                     initial={{ x: -20, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ duration: 0.5, delay: 0.4 }}
@@ -266,7 +280,7 @@ export function SpeakersSection() {
                   </motion.p>
 
                   {/* Description with Fade Effect */}
-                  <motion.p 
+                  <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5, delay: 0.5 }}
@@ -277,7 +291,10 @@ export function SpeakersSection() {
 
                   {/* Enhanced LinkedIn Button */}
                   <motion.a
-                    whileHover={{ scale: 1.05, boxShadow: "0 0 25px rgba(255,11,123,0.5)" }}
+                    whileHover={{
+                      scale: 1.05,
+                      boxShadow: "0 0 25px rgba(255,11,123,0.5)",
+                    }}
                     whileTap={{ scale: 0.95 }}
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}

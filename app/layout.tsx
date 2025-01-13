@@ -1,18 +1,18 @@
-import type { Metadata } from 'next'
-import { Space_Grotesk } from 'next/font/google'
-import './globals.css'
+import type { Metadata } from "next";
+import { Space_Grotesk } from "next/font/google";
+import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({ subsets: ['latin'] })
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'EventX - Book and Explore Events',
-  description: 'The ultimate destination for discovering upcoming events',
-}
+  title: "Elementos9.0",
+  description: "The ultimate destination for discovering upcoming events",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -20,6 +20,5 @@ export default function RootLayout({
         {children}
       </body>
     </html>
-  )
+  );
 }
-
