@@ -1,3 +1,5 @@
+"use client"
+
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
@@ -45,7 +47,7 @@ const faqs = [
   }
 ];
 
-function FAQItem({ question, answer }: { question: string; answer: string }) {
+function FAQItem({ question, answer, index }: { question: string; answer: string; index: number }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -53,13 +55,14 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
       className="border-b border-white/10"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
     >
       <button
         className="w-full py-6 flex items-center justify-between text-left"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span className="text-lg font-medium pr-8">{question}</span>
+        <span className="text-lg font-medium pr-8 text-white/90">{question}</span>
         {isOpen ? 
           <Minus className="w-5 h-5 text-[#FF0B7B]" /> : 
           <Plus className="w-5 h-5 text-[#FF0B7B]" />
@@ -67,7 +70,10 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
       </button>
       <motion.div
         initial={false}
-        animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
+        animate={{ 
+          height: isOpen ? "auto" : 0, 
+          opacity: isOpen ? 1 : 0 
+        }}
         transition={{ duration: 0.3 }}
         className="overflow-hidden"
       >
@@ -78,30 +84,65 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 }
 
 export function FAQSection() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
+
   return (
     <section id="faq" className="container mx-auto px-4 py-16 md:py-24">
-      {/* <motion.div
+      <motion.div
         className="max-w-4xl mx-auto"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      > */}
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Frequently Asked
-            <span className="text-[#FF0B7B]"> Questions</span>
-          </h2>
-          <p className="text-gray-400 text-lg">
+          <motion.h2 
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-4xl md:text-5xl font-black text-white mb-4 relative inline-block"
+          >
+            Frequently Asked{" "}
+            <span className="text-[#FF0B7B] relative">
+              Questions
+              <div className="absolute -bottom-2 left-0 h-1 w-full bg-[#FF0B7B]/30"></div>
+            </span>
+          </motion.h2>
+          <motion.p 
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-gray-400 text-lg max-w-2xl mx-auto"
+          >
             Find answers to common questions about Elementos 9.0
-          </p>
+          </motion.p>
         </div>
 
-        <div className="bg-white/[0.02] backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-white/5">
-          {faqs.map((faq, index) => (
-            <FAQItem key={index} question={faq.question} answer={faq.answer} />
-          ))}
+        <div className="relative bg-black/40 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-white/5">
+          <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent opacity-50 rounded-2xl"></div>
+          <div className="relative z-10">
+            {faqs.map((faq, index) => (
+              <FAQItem 
+                key={index} 
+                question={faq.question} 
+                answer={faq.answer} 
+                index={index}
+              />
+            ))}
+          </div>
         </div>
-      {/* </motion.div> */}
+      </motion.div>
     </section>
   );
 }

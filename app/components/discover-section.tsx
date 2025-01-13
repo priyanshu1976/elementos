@@ -114,19 +114,25 @@ export function DiscoverSection() {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#FF2D78]/5 to-transparent" />
       
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(5)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute animate-float-random"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-            }}
-          >
-            <div className={`w-8 h-8 ${i % 2 === 0 ? 'bg-[#FF2D78]' : 'bg-[#00FFD1]'} opacity-10 rounded-full blur-sm`} />
-          </div>
-        ))}
+        {Array.from({ length: 5 }, (_, i) => {
+          const left = `${((i + 1) * 20) % 100}%`;
+          const top = `${((i + 1) * 17) % 100}%`;
+          const delay = `${(i + 1) * 0.5}s`;
+          
+          return (
+            <div
+              key={i}
+              className="absolute animate-float-random"
+              style={{
+                left,
+                top,
+                animationDelay: delay
+              }}
+            >
+              <div className={`w-8 h-8 ${i % 2 === 0 ? 'bg-[#FF2D78]' : 'bg-[#00FFD1]'} opacity-10 rounded-full blur-sm`} />
+            </div>
+          );
+        })}
       </div>
 
       <div 
@@ -202,7 +208,7 @@ function Card({
       </div>
 
       <div className="absolute inset-0 bg-gradient-to-br from-[#FF2D78]/5 via-transparent to-[#00FFD1]/5" />
-      <div className="absolute inset-0 opacity-20 bg-[url('/noise.png')] mix-blend-overlay" />
+      <div className="absolute inset-0 opacity-20 bg-black/20 mix-blend-overlay" />
       
       <div className="space-y-8 relative z-10">
         <h3 className="text-4xl md:text-6xl font-black text-white font-['Roboto_Mono'] group-hover:text-[#FF2D78] transition-colors duration-300 leading-tight">
