@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { Instagram, Menu, X } from "lucide-react";
+import { InstagramIcon, Menu, X } from "lucide-react";
 import { useState } from "react";
 import Image from "next/image";
 
@@ -69,7 +69,7 @@ export function Navbar() {
                 <span className="text-white group-hover:text-[#FF0B7B] transition-colors duration-300 drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
                   ELEMENTOS
                 </span>
-                <span className="text-white ml-1 group-hover:text-[#075b61] transition-colors duration-300 drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
+                <span className="text-white ml-1 group-hover:text-[#89f7ff] transition-colors duration-300 drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
                   9.O
                 </span>
               </h1>
@@ -131,7 +131,7 @@ export function Navbar() {
               target="_blank"
               className="relative group bg-[#FF0B7B]/10 p-2 rounded-xl hover:bg-[#FF0B7B]/20 transition-colors duration-300"
             >
-              <Instagram className="h-5 w-5 text-[#FF0B7B] group-hover:scale-110 transition-transform duration-300" />
+              <InstagramIcon className="h-5 w-5 text-[#FF0B7B] group-hover:scale-110 transition-transform duration-300" />
             </Link>
           </div>
 
@@ -184,7 +184,7 @@ export function Navbar() {
               className="flex items-center gap-2 group"
               onClick={() => setIsMenuOpen(false)}
             >
-              <Instagram className="h-6 w-6 text-[#FF0B7B] group-hover:scale-110 transition-all duration-300" />
+              <InstagramIcon className="h-6 w-6 text-[#FF0B7B] group-hover:scale-110 transition-all duration-300" />
             </Link>
           </div>
         )}
