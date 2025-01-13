@@ -19,7 +19,7 @@ interface FormData {
 export default function RegistrationForm({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ event: string }>;
 }) {
   const [formData, setFormData] = useState<FormData>({
     teamName: "",
@@ -32,16 +32,17 @@ export default function RegistrationForm({
   useEffect(() => {
     const initializeCollection = async () => {
       try {
-        const { id } = await params;
-        setcollection(id);
-        const eventDocRef = doc(db, id, "metadata");
+        const { event } = await params;
+        setcollection(event);
+        console.log(event);
+        const eventDocRef = doc(db, event, "metadata");
         const eventDocSnap = await getDoc(eventDocRef);
 
         if (!eventDocSnap.exists()) {
           await setDoc(eventDocRef, { createdAt: new Date().toISOString() });
-          console.log(`Collection "${id}" initialized.`);
+          console.log(`Collection "${event}" initialized.`);
         } else {
-          console.log(`Collection "${id}" already exists.`);
+          console.log(`Collection "${event}" already exists.`);
         }
       } catch (err) {
         console.error("Error initializing collection:", err);
@@ -53,6 +54,7 @@ export default function RegistrationForm({
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(eventCollection);
 
     try {
       const teamDocRef = doc(
@@ -81,22 +83,21 @@ export default function RegistrationForm({
       },
     };
 
-    // const response = await axios.post(
-    //   "/api/gettoken",
-    //   JSON.stringify({
-    //     email: formData.teamLeader.email,
-    //   })
-    // );
+    const response = await axios.post(
+      "https://elementos-backend.vercel.app/api/token",
+      {
+        email: formData.teamLeader.email,
+      }
+    );
 
-    const response = {
-      data: "3e3gh9h4g9h58",
-    };
+    const token = response.data.token;
 
     axios
       .post("https://api.emailjs.com/api/v1.0/email/send", data)
       .then(() => {
         console.log("data send for email");
-        window.location.href = `/thanks/${response.data}`;
+        console.log(response.data);
+        window.location.href = `/thanks/${token}`;
         // Sign a JWT with a secret and send it to the next page in parameters
         // Navigate to the event registration page with JWT token
       })

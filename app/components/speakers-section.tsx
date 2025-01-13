@@ -1,33 +1,35 @@
-import Image from 'next/image'
-import { FaLinkedin } from 'react-icons/fa'
+import Image from "next/image";
+import { FaLinkedin } from "react-icons/fa";
 
 export function SpeakersSection() {
   const speakers = [
     {
       name: "YASH AWIDRA",
       role: "Software Engineer@Mercedes-Benz | 200K+ @LinkedIn | Career & LinkedIn Coach | Stand-up comedian",
-      description: "A multifaceted professional, he excels as a Software Engineer at Mercedes-Benz, a Career & LinkedIn Coach, and a passionate advocate for personal branding. Also a Stand-up Comedian, Teacher, Public Speaker, and Author, he shares valuable insights on career growth and personal development with humor and authenticity.",
+      description:
+        "A multifaceted professional, he excels as a Software Engineer at Mercedes-Benz, a Career & LinkedIn Coach, and a passionate advocate for personal branding. Also a Stand-up Comedian, Teacher, Public Speaker, and Author, he shares valuable insights on career growth and personal development with humor and authenticity.",
       image: "/yash.jpg",
-      linkedin: "https://www.linkedin.com/in/yash-awidra-63a4b21a6/"
+      linkedin: "https://www.linkedin.com/in/yash-awidra-63a4b21a6/",
     },
     {
       name: "VIKRAM GAUR",
       role: "LinkedIn Top Voice '24 | Google Cloud Facilitator | SDE @ EY",
-      description: "Vikram Gaur is a LinkedIn Top Voice 2024, SDE at EY, and a Google Cloud Certified Engineer, blending expertise in cloud computing with a passion for tech communities. As a Google Cloud Facilitator and active member of GDG Indore and GirlScript Ireland, he inspires and empowers developers worldwide.",
+      description:
+        "Vikram Gaur is a LinkedIn Top Voice 2024, SDE at EY, and a Google Cloud Certified Engineer, blending expertise in cloud computing with a passion for tech communities. As a Google Cloud Facilitator and active member of GDG Indore and GirlScript Ireland, he inspires and empowers developers worldwide.",
       image: "/vikram.jpg",
-      linkedin: "https://www.linkedin.com/in/vikram-gaur-0252aa185/"
+      linkedin: "https://www.linkedin.com/in/vikram-gaur-0252aa185/",
     },
-  ]
+  ];
 
   return (
     <div className="container mx-auto px-4 py-8 md:py-16">
-  
       <div className="text-center mb-8 md:mb-12">
         <h2 className="text-4xl md:text-5xl font-extrabold text-white">
           Meet Our <span className="text-blue-500 ">Speakers</span>
         </h2>
         <p className="text-gray-400 mt-2 text-lg">
-          Learn from the best in the industry, with a touch of humor and expertise.
+          Learn from the best in the industry, with a touch of humor and
+          expertise.
         </p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 justify-center items-center max-w-5xl mx-auto">
@@ -52,7 +54,9 @@ export function SpeakersSection() {
               <h3 className="text-2xl font-semibold text-white hover:text-blue-400 transition-colors">
                 {speaker.name}
               </h3>
-              <p className="text-blue-300 text-sm font-medium">{speaker.role}</p>
+              <p className="text-blue-300 text-sm font-medium">
+                {speaker.role}
+              </p>
               <p className="text-gray-400 text-sm mt-3 leading-relaxed">
                 {speaker.description}
               </p>
@@ -70,7 +74,7 @@ export function SpeakersSection() {
         ))}
       </div>
     </div>
-  )
+  );
 }
 
 export default SpeakersSection;
