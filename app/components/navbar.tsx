@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { InstagramIcon, Menu, X } from "lucide-react";
 import { useState } from "react";
-import Image from "next/image";
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
