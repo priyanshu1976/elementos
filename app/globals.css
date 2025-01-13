@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap');
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -17,7 +20,6 @@ html, body {
   height: 100vh; /* Full viewport height */
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap');
 
 
 :root {
