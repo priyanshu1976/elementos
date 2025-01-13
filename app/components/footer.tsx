@@ -1,113 +1,137 @@
 import Link from "next/link";
-import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { Instagram, Github, Linkedin } from "lucide-react";
+import { motion } from "framer-motion";
+import Image from "next/image";
 
 export function Footer() {
+  const quickLinks = [
+    { title: "Events", href: "#events" },
+    { title: "Speakers", href: "#speakers" },
+    { title: "Register", href: "#register" },
+    { title: "Schedule", href: "#schedule" },
+  ];
+
+  const contactInfo = [
+    { title: "IETE Students' Forum", value: "TIET, Patiala" },
+    { title: "Email", value: "iete_sc@thapar.edu" },
+    { title: "Contact", value: "+91 93065 xxxx" },
+    { title: "Location", value: "Thapar Institute of Engineering & Technology, Patiala" },
+  ];
+
   return (
-    <footer className="bg-[#1A1B35] mt-8 md:mt-16 py-8 md:py-12 h-auto relative overflow-hidden">
-      {/* Geometric Shapes */}
+    <footer className="bg-[#1A1B35]/80 backdrop-blur-md mt-8 py-12 relative overflow-hidden">
+      {/* Simple Background Gradients */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute w-96 h-96 -top-48 -left-48 bg-[#FF0B7B]/10 rounded-full blur-3xl"></div>
+        <div className="absolute w-96 h-96 -bottom-48 -right-48 bg-[#00F0FF]/10 rounded-full blur-3xl"></div>
+      </div>
 
-      <div className="container mx-auto px-4 flex flex-col justify-center relative z-10">
-        <div className="flex flex-col md:flex-row mb-8 md:mb-12">
-          <Link
-            href="/"
-            className="text-[#CCFF00] text-2xl font-bold mb-4 md:mb-0"
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          {/* Left Column - Quick Links */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="space-y-6"
           >
-            ELEMENTOS<span className="text-white">9.0</span>
-          </Link>
+            <h3 className="text-[#FF0B7B] font-bold text-xl mb-4">Quick Links</h3>
+            <div className="grid grid-cols-2 gap-4">
+              {quickLinks.map((link, index) => (
+                <Link
+                  key={index}
+                  href={link.href}
+                  className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
+                >
+                  <span className="w-1 h-1 bg-[#FF0B7B] rounded-full group-hover:w-2 transition-all"></span>
+                  {link.title}
+                </Link>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Center Column - Logo and Social */}
+          <motion.div className="flex flex-col items-center gap-8">
+            <Link href="/" className="relative group">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="relative w-[400px] h-[160px]"
+              >
+                <Image
+                  src="/newele.png"
+                  alt="ELEMENTOS Logo"
+                  fill
+                  className="object-contain group-hover:scale-200 transition-transform duration-300 scale-150"
+                  priority
+                />
+              </motion.div>
+            </Link>
+
+            {/* Social Links */}
+            <motion.div className="flex gap-6">
+              <Link 
+                href="https://instagram.com" 
+                target="_blank"
+                className="bg-white/5 p-3 rounded-lg hover:bg-[#FF0B7B]/20 transition-colors group"
+              >
+                <Instagram className="w-5 h-5 text-[#FF0B7B] group-hover:scale-110 transition-transform" />
+              </Link>
+              <Link 
+                href="https://github.com" 
+                target="_blank"
+                className="bg-white/5 p-3 rounded-lg hover:bg-[#00F0FF]/20 transition-colors group"
+              >
+                <Github className="w-5 h-5 text-[#00F0FF] group-hover:scale-110 transition-transform" />
+              </Link>
+              <Link 
+                href="https://linkedin.com" 
+                target="_blank"
+                className="bg-white/5 p-3 rounded-lg hover:bg-white/20 transition-colors group"
+              >
+                <Linkedin className="w-5 h-5 text-white group-hover:scale-110 transition-transform" />
+              </Link>
+            </motion.div>
+          </motion.div>
+
+          {/* Right Column - Contact Info */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="space-y-6"
+          >
+            <h3 className="text-[#00F0FF] font-bold text-xl mb-4">Contact Information</h3>
+            <div className="space-y-4">
+              {contactInfo.map((info, index) => (
+                <div key={index} className="text-gray-400">
+                  <h4 className="text-white text-sm">{info.title}</h4>
+                  <p className="hover:text-[#00F0FF] transition-colors">{info.value}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 text-gray-400">
-          {/* Day 0 Card with Circle */}
-          <div
-            id="day-0"
-            className="p-4 border border-gray-800 rounded-lg relative group"
-          >
-            <div className="absolute top-4 right-4 w-8 h-8 border-2 border-[#CCFF00] rounded-full opacity-50 group-hover:opacity-100 transition-opacity"></div>
-            <h3 className="text-[#CCFF00] font-semibold mb-2">
-              Day 0 - January 30
-            </h3>
-            <h4 className="font-medium mb-1">Pre-Event Activities</h4>
-            <ul className="space-y-2">
-              <li>
-                <span className="text-[#CCFF00]">Flashmob and Logo Reveal</span>
-                <p>Venue: K Lawns</p>
-                <p>Time: TBD</p>
-              </li>
-            </ul>
+        {/* Bottom Section */}
+        <motion.div 
+          className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          <div className="flex gap-6 text-sm text-gray-400">
+            <Link href="/about" className="hover:text-white transition-colors">About Us</Link>
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-white transition-colors">Terms of Use</Link>
           </div>
-
-          {/* Day 1 Card with Triangle */}
-          <div
-            id="day-1"
-            className="p-4 border border-gray-800 rounded-lg relative group"
-          >
-            <div className="absolute top-4 right-4 w-0 h-0 border-l-[12px] border-l-transparent border-b-[20px] border-b-[#CCFF00] border-r-[12px] border-r-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
-            <h3 className="text-[#CCFF00] font-semibold mb-2">
-              Day 1 - January 31
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                <span className="text-[#CCFF00]">Opening Ceremony</span>
-                <p>Time: 5:00 PM</p>
-                <p>Activities: Lighting ceremony, Welcome speech</p>
-              </li>
-              <li>
-                <span className="text-[#CCFF00]">UI/UX Competition</span>
-                <p>Format: Online</p>
-              </li>
-            </ul>
+          <div className="flex items-center gap-2">
+            <span className="text-[#FF0B7B]">Made with</span>
+            <span className="animate-pulse">❤️</span>
+            <span className="text-[#00F0FF]">by Team IETE</span>
           </div>
-
-          {/* Day 2 Card with Square */}
-          <div
-            id="day-2"
-            className="p-4 border border-gray-800 rounded-lg relative group"
-          >
-            <div className="absolute top-4 right-4 w-6 h-6 border-2 border-[#CCFF00] opacity-50 group-hover:opacity-100 transition-opacity"></div>
-            <h3 className="text-[#CCFF00] font-semibold mb-2">
-              Day 2 - February 1
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                <span className="text-[#CCFF00]">Prompt vs Prompt</span>
-                <p>Creative problem solving competition</p>
-              </li>
-              <li>
-                <span className="text-[#CCFF00]">Electronics Competition</span>
-              </li>
-              <li>
-                <span className="text-[#CCFF00]">Hackathon</span>
-                <p>Time: 7:00 PM - 8:00 AM</p>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="flex flex-col md:flex-row pt-8 justify-between">
-          <div className="flex gap-6 mb-4 md:mb-0">
-            <Link href="#" className="text-gray-400 hover:text-[#CCFF00]">
-              <Facebook className="h-5 w-5" />
-            </Link>
-            <Link href="#" className="text-gray-400 hover:text-[#CCFF00]">
-              <Twitter className="h-5 w-5" />
-            </Link>
-            <Link href="#" className="text-gray-400 hover:text-[#CCFF00]">
-              <Instagram className="h-5 w-5" />
-            </Link>
-            <Link href="#" className="text-gray-400 hover:text-[#CCFF00]">
-              <Linkedin className="h-5 w-5" />
-            </Link>
-          </div>
-
-          <div className="flex gap-4 md:gap-8 text-sm text-gray-400">
-            <Link href="/terms">Terms of Agreement</Link>
-            <Link href="/privacy">Privacy Policy</Link>
-          </div>
-        </div>
-
-        <div className="flex gap-4 md:gap-8 text-xl text-gray-400 justify-center items-center mt-8">
-          Made with ❤️ teamelementos
-        </div>
+        </motion.div>
       </div>
     </footer>
   );

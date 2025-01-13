@@ -1,32 +1,47 @@
 import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+import Link from "next/link";
 
-export function TicketSection() {
+export function AboutSection() {
   return (
-    <div className="container mx-auto px-4 py-8 md:py-16">
-      <div className="flex flex-col md:flex-row justify-between items-center">
-        <div className="max-w-md mb-8 md:mb-0">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            DECIDE TO JOIN
-            <br />
-            THE EVENT
-          </h2>
-          <p className="text-gray-400 mb-6">
-            Once you've found an event you're interested in, you can view all
-            the details and information you need, including the event data,
-            time, location, lineup, speakers and agenda.
-          </p>
-          <button className="bg-[#7B61FF] lg:w-[400px] lg:h-[70px] lg:text-[30px] text-white px-6 md:px-8 py-3 rounded-full font-medium flex items-center gap-2 hover:bg-opacity-90 transition-colors">
-            GET TICKET
-            <ArrowRight className="h-5 w-5 lg:h-[50px] lg:w-[50px]" />
-          </button>
-        </div>
-        <div className="relative">
-          <div className="w-48 md:w-64 h-24 md:h-32 bg-[#CCFF00] rounded-lg transform rotate-12 flex items-center justify-center text-black text-xl md:text-2xl font-bold">
-            TICKET
+    <section id="about" className="container mx-auto px-4 py-16 md:py-24">
+      <motion.div 
+        className="max-w-4xl mx-auto text-center"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <h2 className="text-4xl md:text-5xl font-bold mb-12">
+          ABOUT
+          <span className="text-[#FF0B7B]"> ELEMENTOS</span>
+          <span className="text-[#00F0FF]"> 9.0</span>
+        </h2>
+
+        <motion.div 
+          className="relative p-8 rounded-2xl backdrop-blur-sm border border-white/10"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-[#FF0B7B]/10 via-black/50 to-[#00F0FF]/10 rounded-2xl" />
+          <div className="relative">
+            <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
+              ELEMENTOS is IETE Students' Forum's flagship technical event, bringing together 
+              the brightest minds in technology. In its 9th edition, we continue to push 
+              boundaries and create an immersive experience for all tech enthusiasts.
+            </p>
+            <Link 
+              href="#events"
+              className="inline-flex items-center gap-2 bg-[#FF0B7B] px-8 py-4 rounded-full font-medium hover:bg-opacity-90 transition-all hover:scale-105 text-lg"
+            >
+              Explore Events
+              <ArrowRight className="w-6 h-6" />
+            </Link>
           </div>
-        </div>
-      </div>
-    </div>
+        </motion.div>
+      </motion.div>
+    </section>
   );
 }
-export default TicketSection;
+
+export default AboutSection;
