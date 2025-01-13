@@ -65,7 +65,9 @@ export function Hero() {
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     mountRef.current?.appendChild(renderer.domElement);
+
     // Create a plane for the logo
+  
 
     // Handle window resize
     const handleResize = () => {
@@ -172,32 +174,28 @@ export function Hero() {
       </div>
 
       {/* Logo and Timer Container */}
-      <div className="flex flex-col items-center justify-center z-10 px-4 sm:px-6 md:px-8 h-full">
-        {/* Logo Container */}
-        <motion.div 
-          className="relative w-[200px] xs:w-[280px] sm:w-[400px] md:w-[500px] lg:w-[600px]"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-pink-500/20 via-transparent to-pink-500/20 blur-3xl"></div>
+      <div className="scale-110 flex flex-col items-center z-10 mt-6 md:mt-12">
+        {/* Three.js Container for 3D Logo */}
+        <div ref={mountRef} className="w-full h-[400px] relative">
           <motion.img
-            src="/newele.png"
-            alt="Elementos Logo"
-            className="w-full h-auto object-contain drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          />
-        </motion.div>
+          src="./newele.png"
+          style={{
+            marginTop:"-26rem",
+            marginLeft:"-1rem"
+          }}
+          >
+
+          </motion.img>
+        </div>
 
         {/* Timer with Enhanced Design */}
         <motion.div 
-          className="w-full max-w-[95vw] xs:max-w-[90vw] sm:max-w-2xl mt-6 sm:mt-8 md:mt-10"
+          className="relative mt-8 md:mt-10"
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.5 }}
         >
-          <div className="flex flex-wrap justify-center gap-2 xs:gap-3 sm:gap-4 md:gap-6 text-white backdrop-blur-md bg-black/20 px-2 xs:px-3 sm:px-4 md:px-6 py-2 xs:py-3 sm:py-4 md:py-5 rounded-2xl border border-white/10 relative overflow-hidden">
+          <div className="flex gap-6 md:gap-8 text-white backdrop-blur-md bg-black/20 px-8 py-6 rounded-2xl border border-white/10 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-cyan-500/10"></div>
             {[
               { value: countdown.days, label: "DAYS" },
@@ -207,42 +205,42 @@ export function Hero() {
             ].map((item, index) => (
               <motion.div
                 key={index}
-                className="relative group flex-1 min-w-[60px] xs:min-w-[80px] sm:min-w-[100px] text-center"
+                className="relative group"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.4 + index * 0.1 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-t from-pink-500/5 to-transparent scale-0 group-hover:scale-100 transition-transform duration-300 rounded-lg"></div>
-                <div className="text-base xs:text-lg sm:text-xl md:text-3xl lg:text-4xl font-bold font-mono tracking-wider group-hover:text-pink-500 transition-colors relative">
+                <div className="text-2xl md:text-4xl lg:text-5xl font-bold font-mono tracking-wider group-hover:text-pink-500 transition-colors relative">
                   {String(item.value).padStart(2, '0')}
                   <div className="absolute -inset-2 bg-pink-500/20 rounded-lg blur opacity-0 group-hover:opacity-100 transition duration-300"></div>
                 </div>
-                <div className="text-[8px] xs:text-[10px] sm:text-xs md:text-sm lg:text-base text-pink-200/80 font-medium mt-0.5 xs:mt-1 group-hover:text-pink-200 transition-colors">{item.label}</div>
+                <div className="text-sm md:text-base lg:text-lg text-pink-200/80 font-medium mt-2 text-center group-hover:text-pink-200 transition-colors">{item.label}</div>
               </motion.div>
             ))}
           </div>
         </motion.div>
-
-        {/* Enhanced Button */}
-        <motion.button 
-          className="relative mt-6 sm:mt-8 md:mt-10 group z-10"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200 animate-gradient-x"></div>
-          <div className="relative px-3 xs:px-4 sm:px-6 md:px-8 py-2 xs:py-3 sm:py-4 bg-black rounded-lg leading-none flex items-center">
-            <div className="flex items-center space-x-1.5 xs:space-x-2">
-              <Play className="h-3 w-3 xs:h-4 xs:w-4 sm:h-5 sm:w-5 text-pink-500 group-hover:text-pink-400 transition-colors" />
-              <span className="text-sm xs:text-base sm:text-lg text-gray-100 group-hover:text-white transition-colors font-bold">JOIN THE GAME</span>
-              <ArrowRight className="h-3 w-3 xs:h-4 xs:w-4 sm:h-5 sm:w-5 text-pink-500 group-hover:text-pink-400 transition-colors group-hover:translate-x-1 transition-transform" />
-            </div>
-            <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-pink-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          </div>
-        </motion.button>
       </div>
+
+      {/* Enhanced Button */}
+      <motion.button 
+        className="relative mt-10 md:mt-12 group z-10"
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.8 }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200 animate-gradient-x"></div>
+        <div className="relative px-8 py-4 bg-black rounded-lg leading-none flex items-center">
+          <div className="flex items-center space-x-2">
+            <Play className="h-5 w-5 text-pink-500 group-hover:text-pink-400 transition-colors" />
+            <span className="text-gray-100 group-hover:text-white transition-colors text-lg font-bold">JOIN THE GAME</span>
+            <ArrowRight className="h-5 w-5 text-pink-500 group-hover:text-pink-400 transition-colors group-hover:translate-x-1 transition-transform" />
+          </div>
+          <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-pink-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        </div>
+      </motion.button>
     </div>
   );
 }
