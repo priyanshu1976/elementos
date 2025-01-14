@@ -174,15 +174,16 @@ export function Hero() {
       </div>
 
       {/* Logo and Timer Container */}
-      <div className="scale-110 flex flex-col items-center z-10 mt-6 md:mt-12">
+      <div className="scale-110 flex flex-col items-center z-10 mt-8 md:mt-12 sm:mt-4">
         {/* Three.js Container for 3D Logo */}
         <div ref={mountRef} className="w-full h-[400px] relative">
           <motion.img
           src="./newele.png"
-          style={{
-            marginTop:"-26rem",
-            marginLeft:"-1rem"
-          }}
+          className=" xl:-mt-[26rem] -ml-[1rem]"
+          // style={{
+          //   marginTop:"-26rem",
+          //   marginLeft:"-1rem"
+          // }}
           >
 
           </motion.img>
@@ -190,12 +191,12 @@ export function Hero() {
 
         {/* Timer with Enhanced Design */}
         <motion.div 
-          className="relative mt-8 md:mt-10"
+          className="relative mt-48  md:mt-10"
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.5 }}
         >
-          <div className="flex gap-6 md:gap-8 text-white backdrop-blur-md bg-black/20 px-8 py-6 rounded-2xl border border-white/10 relative overflow-hidden">
+          <div className="z-20 bottom-72 flex gap-6  mt-24 :md:gap-8 text-white backdrop-blur-md bg-black/20 px-8 py-6 rounded-2xl border border-white/10 relative overflow-hidden xl:top-5">
             <div className="absolute inset-0 bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-cyan-500/10"></div>
             {[
               { value: countdown.days, label: "DAYS" },
