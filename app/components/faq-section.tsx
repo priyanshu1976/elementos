@@ -11,7 +11,7 @@ const faqs = [
   },
   {
     question: "When and where will Elementos 9.0 take place?",
-    answer: "Elementos 9.0 will be held at Thapar Institute of Engineering & Technology, Patiala. The exact dates and venue details will be announced soon."
+    answer: "Elementos 9.0 will be held at Thapar Institute of Engineering & Technology, Patiala. from 31st January to 2nd February 2025."
   },
   {
     question: "How can I register for Elementos 9.0?",
@@ -23,7 +23,7 @@ const faqs = [
   },
   {
     question: "Is there a registration fee for participating?",
-    answer: "Registration fees vary by event. Some events are free, while others may have a nominal fee. Early bird discounts may be available for certain events."
+    answer: "Registration is free for Thapar Institute students. For participants from other colleges, there will be a nominal registration fee. The exact fee structure will be announced during registration."
   },
   {
     question: "Who can participate in Elementos 9.0?",
