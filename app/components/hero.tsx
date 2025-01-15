@@ -121,83 +121,81 @@ export function Hero() {
 
   return (
     <div
-      className="container mx-auto px-4 py-4 md:py-8 relative overflow-hidden min-h-screen flex flex-col items-center justify-center"
+      className="relative w-screen h-screen overflow-hidden flex flex-col items-center justify-center"
       style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)), url('/bg.jpg')`,
+        background: `
+          linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.95),
+            rgba(0, 0, 0, 0.8)
+          ),
+          url('/bg.jpg')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed",
       }}
     >
-      {/* Animated Background Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,20,147,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,20,147,0.05)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)] opacity-30"></div>
+      {/* Background Grid */}
+      <div 
+        className="absolute inset-0 bg-[linear-gradient(rgba(255,20,147,0.07)_1px,transparent_1px),linear-gradient(90deg,rgba(255,20,147,0.07)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)] opacity-40"
+        style={{ transform: 'scale(1.1)' }}
+      />
 
       {/* Glowing Orbs */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-pink-500/30 rounded-full filter blur-[128px] animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/20 rounded-full filter blur-[128px] animate-pulse delay-1000"></div>
+        <div 
+          className="absolute top-1/4 left-1/4 w-[40vw] h-[40vw] bg-pink-500/20 rounded-full filter blur-[130px] animate-pulse"
+          style={{ animationDuration: '4s' }}
+        />
+        <div 
+          className="absolute bottom-1/4 right-1/4 w-[40vw] h-[40vw] bg-blue-500/15 rounded-full filter blur-[130px] animate-pulse"
+          style={{ animationDuration: '5s', animationDelay: '1s' }}
+        />
+        <div 
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[45vw] h-[45vw] bg-purple-500/10 rounded-full filter blur-[150px] animate-pulse"
+          style={{ animationDuration: '6s', animationDelay: '2s' }}
+        />
       </div>
 
-      {/* Client-side floating particles */}
+      {/* Floating Particles */}
       <FloatingParticles />
 
-      {/* Left Side Decorative Elements */}
-      <div className="absolute left-0 inset-y-0 w-32 pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-r from-pink-500/20 to-transparent"></div>
-        {[...Array(5)].map((_, i) => (
-          <div
-            key={`left-${i}`}
-            className="absolute w-px h-full bg-gradient-to-b from-transparent via-pink-500/30 to-transparent animate-pulse"
-            style={{ 
-              left: `${i * 8}px`,
-              animationDelay: `${i * 200}ms`,
-              opacity: 1 - (i * 0.15)
-            }}
-          />
-        ))}
-      </div>
+      {/* Main Content Container */}
+      <div className="container mx-auto px-4 relative z-10 flex flex-col items-center justify-center gap-12">
+        {/* Logo Section */}
+        <motion.div
+          className="w-full max-w-md xl:mt-40"
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="relative group">
+            <div className="absolute -inset-1" />
+            <div className="relative p-4">
+              <motion.img
+                src="/newele.png"
+                alt="Logo"
+                className="w-full h-auto object-contain scale-[6] xl:scale-[9] xl:mb-20"
+                style={{
+                  maxHeight: '120px',
+                  transformOrigin: 'center',
+                }}
+               
+              />
+            </div>
+          </div>
+        </motion.div>
 
-      {/* Right Side Decorative Elements */}
-      <div className="absolute right-0 inset-y-0 w-32 pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-l from-pink-500/20 to-transparent"></div>
-        {[...Array(5)].map((_, i) => (
-          <div
-            key={`right-${i}`}
-            className="absolute w-px h-full bg-gradient-to-b from-transparent via-pink-500/30 to-transparent animate-pulse"
-            style={{ 
-              right: `${i * 8}px`,
-              animationDelay: `${i * 200}ms`,
-              opacity: 1 - (i * 0.15)
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Logo and Timer Container */}
-      <div className="scale-110 flex flex-col items-center z-10 mt-8 md:mt-12 sm:mt-4">
-        {/* Three.js Container for 3D Logo */}
-        <div ref={mountRef} className="w-full h-[400px] relative">
-          <motion.img
-          src="./newele.png"
-          className=" xl:-mt-[26rem] -ml-[1rem]"
-          // style={{
-          //   marginTop:"-26rem",
-          //   marginLeft:"-1rem"
-          // }}
-          >
-
-          </motion.img>
-        </div>
-
-        {/* Timer with Enhanced Design */}
+        {/* Timer Section */}
         <motion.div 
-          className="relative mt-48  md:mt-10"
+          className="w-full max-w-2xl"
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.5 }}
         >
-          <div className="z-20 bottom-72 flex gap-6  mt-24 :md:gap-8 text-white backdrop-blur-md bg-black/20 px-8 py-6 rounded-2xl border border-white/10 relative overflow-hidden xl:top-5">
-            <div className="absolute inset-0 bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-cyan-500/10"></div>
+          <div className="flex justify-center gap-6 md:gap-8 backdrop-blur-md bg-black/20 px-8 py-6 rounded-2xl border border-white/10 relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-cyan-500/10" />
             {[
               { value: countdown.days, label: "DAYS" },
               { value: countdown.hours, label: "HOURS" },
@@ -211,37 +209,67 @@ export function Hero() {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.4 + index * 0.1 }}
               >
-                <div className="absolute inset-0 bg-gradient-to-t from-pink-500/5 to-transparent scale-0 group-hover:scale-100 transition-transform duration-300 rounded-lg"></div>
-                <div className="text-2xl md:text-4xl lg:text-5xl font-bold font-mono tracking-wider group-hover:text-pink-500 transition-colors relative">
+                <div className="text-3xl md:text-4xl lg:text-5xl font-bold font-mono tracking-wider text-white group-hover:text-pink-500 transition-colors">
                   {String(item.value).padStart(2, '0')}
-                  <div className="absolute -inset-2 bg-pink-500/20 rounded-lg blur opacity-0 group-hover:opacity-100 transition duration-300"></div>
                 </div>
-                <div className="text-sm md:text-base lg:text-lg text-pink-200/80 font-medium mt-2 text-center group-hover:text-pink-200 transition-colors">{item.label}</div>
+                <div className="text-sm md:text-base text-pink-200/80 font-medium mt-2 text-center">
+                  {item.label}
+                </div>
               </motion.div>
             ))}
           </div>
         </motion.div>
-      </div>
 
-      {/* Enhanced Button */}
-      <motion.button 
-        className="relative mt-10 md:mt-12 group z-10"
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.8 }}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200 animate-gradient-x"></div>
-        <div className="relative px-8 py-4 bg-black rounded-lg leading-none flex items-center">
-          <div className="flex items-center space-x-2">
+        {/* CTA Button */}
+        <motion.button 
+          className="relative group"
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.8 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200 animate-gradient-x" />
+          <div className="relative px-8 py-4 bg-black rounded-lg leading-none flex items-center gap-3">
             <Play className="h-5 w-5 text-pink-500 group-hover:text-pink-400 transition-colors" />
-            <span className="text-gray-100 group-hover:text-white transition-colors text-lg font-bold">JOIN THE GAME</span>
+            <span className="text-gray-100 group-hover:text-white transition-colors text-lg font-bold">
+              JOIN THE GAME
+            </span>
             <ArrowRight className="h-5 w-5 text-pink-500 group-hover:text-pink-400 transition-colors group-hover:translate-x-1 transition-transform" />
           </div>
-          <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-pink-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-        </div>
-      </motion.button>
+        </motion.button>
+      </div>
+
+      {/* Side Decorative Elements */}
+      <div className="absolute inset-y-0 left-0 w-32 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-r from-pink-500/20 to-transparent" />
+        {[...Array(5)].map((_, i) => (
+          <div
+            key={`left-${i}`}
+            className="absolute w-px h-full bg-gradient-to-b from-transparent via-pink-500/30 to-transparent animate-pulse"
+            style={{ 
+              left: `${i * 8}px`,
+              animationDelay: `${i * 200}ms`,
+              opacity: 1 - (i * 0.15)
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="absolute inset-y-0 right-0 w-32 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-l from-pink-500/20 to-transparent" />
+        {[...Array(5)].map((_, i) => (
+          <div
+            key={`right-${i}`}
+            className="absolute w-px h-full bg-gradient-to-b from-transparent via-pink-500/30 to-transparent animate-pulse"
+            style={{ 
+              right: `${i * 8}px`,
+              animationDelay: `${i * 200}ms`,
+              opacity: 1 - (i * 0.15)
+            }}
+          />
+        ))}
+      </div>
     </div>
   );
 }

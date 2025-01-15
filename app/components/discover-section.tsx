@@ -68,7 +68,7 @@ export function DiscoverSection() {
     },
   ];
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay()])
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 5000 })])
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([])
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -161,17 +161,52 @@ export function DiscoverSection() {
       </div>
 
       <div className="container mx-auto px-4 py-16">
-        <div className="overflow-hidden" ref={emblaRef}>
-          <div className="flex">
-            {events.map((event, index) => (
-              <div className="flex-[0_0_100%] min-w-0" key={index}>
-                <Card
-                  title={event.title}
-                  date={event.date}
-                  desc={event.description}
-                  eventName={event.eventName}
-                />
-              </div>
+        <h2 className="text-5xl font-black text-center mb-12 text-white">
+          <span className="text-[#FF2D78]">Discover</span> Our Events
+        </h2>
+        
+        <div className="relative">
+          <div className="overflow-hidden" ref={emblaRef}>
+            <div className="flex">
+              {events.map((event, index) => (
+                <div className="flex-[0_0_100%] min-w-0 px-4" key={index}>
+                  <Card
+                    title={event.title}
+                    date={event.date}
+                    desc={event.description}
+                    eventName={event.eventName}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Navigation Buttons */}
+          <button
+            onClick={scrollPrev}
+            className="absolute left-4 top-1/2 -translate-y-1/2 bg-[#FF2D78]/10 hover:bg-[#FF2D78]/20 p-4 rounded-full backdrop-blur-sm transition-all duration-300 z-10"
+          >
+            <ArrowLeft className="w-6 h-6 text-white" />
+          </button>
+          <button
+            onClick={scrollNext}
+            className="absolute right-4 top-1/2 -translate-y-1/2 bg-[#FF2D78]/10 hover:bg-[#FF2D78]/20 p-4 rounded-full backdrop-blur-sm transition-all duration-300 z-10"
+          >
+            <ArrowRight className="w-6 h-6 text-white" />
+          </button>
+
+          {/* Dots navigation */}
+          <div className="flex justify-center gap-2 mt-8">
+            {scrollSnaps.map((_, index) => (
+              <button
+                key={index}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  index === selectedIndex 
+                    ? 'bg-[#FF2D78] w-6' 
+                    : 'bg-white/20 hover:bg-white/40'
+                }`}
+                onClick={() => emblaApi?.scrollTo(index)}
+              />
             ))}
           </div>
         </div>
@@ -196,7 +231,7 @@ function Card({
   const router = useRouter();
 
   return (
-    <div className="bg-[#1A1B35] rounded-3xl p-10 md:p-16 max-w-5xl mx-auto border-4 border-[#FF2D78] relative overflow-hidden shadow-[0_0_30px_rgba(255,45,120,0.4)] hover:shadow-[0_0_50px_rgba(255,45,120,0.6)] transition-all duration-500 group">
+    <div className="bg-[#1A1B35]/80 backdrop-blur-lg rounded-3xl p-10 md:p-16 max-w-5xl mx-auto border-4 border-[#FF2D78] relative overflow-hidden shadow-[0_0_30px_rgba(255,45,120,0.4)] hover:shadow-[0_0_50px_rgba(255,45,120,0.6)] transition-all duration-500 group">
       <div className="absolute -top-4 -right-4 transform rotate-12 z-20">
         <div className="relative">
           <div className="absolute inset-0 bg-[#FF2D78] blur-xl opacity-50 rounded-full" />
