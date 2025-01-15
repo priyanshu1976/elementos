@@ -15,7 +15,7 @@ export function Footer() {
   const contactInfo = [
     { title: "IETE Students' Forum", value: "TIET, Patiala" },
     { title: "Email", value: "iete_sc@thapar.edu" },
-    { title: "Contact", value: "+91 93065 xxxx" },
+    { title: "Contact", value: "+91 93065 15524 , +91 88475 53417" },
     { title: "Location", value: "Thapar Institute of Engineering & Technology, Patiala" },
   ];
 

@@ -51,10 +51,10 @@ function FloatingParticles() {
 
 export function Hero() {
   const [countdown, setCountdown] = useState({
-    days: 0,
-    hours: 23,
-    minutes: 4,
-    seconds: 47,
+    days: 14,
+    hours: 10,
+    minutes: 32,
+    seconds: 1,
   });
 
   const mountRef = useRef<HTMLDivElement | null>(null);

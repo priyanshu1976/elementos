@@ -22,43 +22,21 @@ export function DiscoverSection() {
       eventName: "openingCeremony",
     },
     {
-      title: "UI/UX Event",
-      description: "An online event focusing on UI/UX design.",
-      date: "January 31",
-      eventName: "uiux",
-    },
-    {
-      title: "Prompt vs Prompt",
-      description:
-        "Participants compete by responding to given prompts with creativity or logic.",
-      date: "February 1",
-      eventName: "promptVsPrompt",
-    },
-    {
-      title: "Electronics Competition",
-      description: "A competition testing skills in electronics.",
-      date: "February 1",
-      eventName: "electronics",
-    },
-    {
-      title: "Hackathon/Case Study",
-      description:
-        "An overnight event where teams solve a problem or develop a solution, ending at 8:00 AM the next day.",
-      date: "February 1",
-      eventName: "hackathon",
-    },
-    {
-      title: "Bug Bounty",
-      description: "A competitive event focused on finding and fixing bugs.",
-      date: "February 2",
-      eventName: "bugBounty",
-    },
-    {
-      title: "Buggy Racing",
+      title: "F1 Car Racing",
       description: "A fun and competitive buggy racing event.",
-      date: "February 2",
-      eventName: "buggyRacing",
+      date: "February 1",
+      eventName: "f1CarRacing",
     },
+
+    {
+      title: "Robotothon",
+      description:
+        "An overnight robotics competition where teams build and program robots to solve challenges - a first-time event at Thapar Institute.",
+      date: "February 1",
+      eventName: "robotothon",
+    },
+  
+
     {
       title: "Closing Ceremony",
       description:
