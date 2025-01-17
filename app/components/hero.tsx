@@ -51,10 +51,10 @@ function FloatingParticles() {
 
 export function Hero() {
   const [countdown, setCountdown] = useState({
-    days: 14,
-    hours: 10,
-    minutes: 32,
-    seconds: 1,
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
   });
 
   const mountRef = useRef<HTMLDivElement | null>(null);
@@ -87,37 +87,47 @@ export function Hero() {
     };
   }, []);
 
-  // Add countdown timer functionality
+  // Update countdown timer functionality
   useEffect(() => {
+    const targetDate = new Date('2025-01-31T00:00:00');
+
+    const calculateTimeLeft = () => {
+      const now = new Date();
+      const difference = targetDate.getTime() - now.getTime();
+
+      if (difference <= 0) {
+        // Event has started
+        return {
+          days: 0,
+          hours: 0,
+          minutes: 0,
+          seconds: 0
+        };
+      }
+
+      return {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+        minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+        seconds: Math.floor((difference % (1000 * 60)) / 1000)
+      };
+    };
+
+    // Initial calculation
+    setCountdown(calculateTimeLeft());
+
+    // Update every second
     const timer = setInterval(() => {
-      setCountdown(prev => {
-        let { days, hours, minutes, seconds } = prev;
-        
-        if (seconds > 0) {
-          seconds--;
-        } else {
-          seconds = 59;
-          if (minutes > 0) {
-            minutes--;
-          } else {
-            minutes = 59;
-            if (hours > 0) {
-              hours--;
-            } else {
-              hours = 23;
-              if (days > 0) {
-                days--;
-              }
-            }
-          }
-        }
-        
-        return { days, hours, minutes, seconds };
-      });
+      setCountdown(calculateTimeLeft());
     }, 1000);
 
     return () => clearInterval(timer);
   }, []);
+
+  const scrollToEvents = () => {
+    const eventsSection = document.getElementById('events');
+    eventsSection?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <div
@@ -222,7 +232,8 @@ export function Hero() {
 
         {/* CTA Button */}
         <motion.button 
-          className="relative group"
+          onClick={scrollToEvents}
+          className="relative group cursor-pointer"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.8 }}

@@ -126,7 +126,7 @@ export function Navbar() {
               </span>
             </Link>
             <Link
-              href="https://instagram.com"
+              href="https://www.instagram.com/iete_thapar?igsh=cWJ3NDN5cjg5cXZt"
               target="_blank"
               className="relative group bg-[#FF0B7B]/10 p-2 rounded-xl hover:bg-[#FF0B7B]/20 transition-colors duration-300"
             >

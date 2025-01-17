@@ -8,42 +8,20 @@ import { useRouter } from 'next/navigation'
 export function DiscoverSection() {
   const events = [
     {
-      title: "Pre-Event Activities: Flashmob and Logo Reveal",
-      description:
-        "A flashmob to create excitement and a logo reveal to officially announce the event.",
-      date: "January 30",
-      eventName: "preEvent",
-    },
-    {
-      title: "Opening Ceremony",
-      description:
-        "Includes a lighting ceremony by President Hemdutt Joshi Sir, welcome speech, and a guest speaker session.",
-      date: "January 31",
-      eventName: "openingCeremony",
-    },
-    {
       title: "F1 Car Racing",
       description: "A fun and competitive buggy racing event.",
       date: "February 1",
       eventName: "f1CarRacing",
+      rulebook: "/rulebooks/f1-racing-rulebook.pdf"
     },
-
     {
       title: "Robotothon",
       description:
         "An overnight robotics competition where teams build and program robots to solve challenges - a first-time event at Thapar Institute.",
       date: "February 1",
       eventName: "robotothon",
-    },
-  
-
-    {
-      title: "Closing Ceremony",
-      description:
-        "Includes a quiz, prize distribution, event highlights, and a closing speech.",
-      date: "February 2",
-      eventName: "closingCeremony",
-    },
+      rulebook: "/rulebooks/robotothon-rulebook.pdf"
+    }
   ];
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 5000 })])
@@ -153,6 +131,7 @@ export function DiscoverSection() {
                     date={event.date}
                     desc={event.description}
                     eventName={event.eventName}
+                    rulebook={event.rulebook}
                   />
                 </div>
               ))}
@@ -200,13 +179,16 @@ function Card({
   date,
   desc,
   eventName,
+  rulebook,
 }: {
   title: string;
   date: string;
   desc: string;
   eventName: string;
+  rulebook: string;
 }) {
   const router = useRouter();
+  const shouldShowButtons = !["openingCeremony", "preEvent", "closingCeremony"].includes(eventName);
 
   return (
     <div className="bg-[#1A1B35]/80 backdrop-blur-lg rounded-3xl p-10 md:p-16 max-w-5xl mx-auto border-4 border-[#FF2D78] relative overflow-hidden shadow-[0_0_30px_rgba(255,45,120,0.4)] hover:shadow-[0_0_50px_rgba(255,45,120,0.6)] transition-all duration-500 group">
@@ -233,16 +215,40 @@ function Card({
           {desc}
         </p>
         
-        <button
-          onClick={() => router.push(`/register/${eventName}`)}
-          className="group/btn relative w-full sm:w-auto"
-        >
-          <div className="absolute inset-0 bg-[#FF2D78] transform skew-x-6 rounded-xl transition-all duration-300 group-hover/btn:bg-[#00FFD1] blur-lg opacity-50" />
-          <div className="relative bg-[#FF2D78] text-white text-3xl font-black px-12 py-6 rounded-xl transform -skew-x-6 transition-all duration-300 group-hover/btn:bg-[#00FFD1] group-hover/btn:text-black group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 flex items-center justify-center gap-4 border-2 border-white/20">
-            ENTER GAME
-            <ArrowRight className="h-8 w-8 group-hover/btn:translate-x-2 transition-transform" />
+        {shouldShowButtons && (
+          <div className="flex flex-col sm:flex-row gap-4">
+            <button
+              onClick={() => router.push(`/register/${eventName}`)}
+              className="group/btn relative w-full sm:w-auto"
+            >
+              <div className="absolute inset-0 bg-[#FF2D78] transform skew-x-6 rounded-xl transition-all duration-300 group-hover/btn:bg-[#00FFD1] blur-lg opacity-50" />
+              <div className="relative bg-[#FF2D78] text-white text-3xl font-black px-12 py-6 rounded-xl transform -skew-x-6 transition-all duration-300 group-hover/btn:bg-[#00FFD1] group-hover/btn:text-black group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 flex items-center justify-center gap-4 border-2 border-white/20">
+                ENTER GAME
+                <ArrowRight className="h-8 w-8 group-hover/btn:translate-x-2 transition-transform" />
+              </div>
+            </button>
+
+            <a
+              href={rulebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group/btn relative w-full sm:w-auto"
+            >
+              <div className="absolute inset-0 bg-[#00FFD1] transform skew-x-6 rounded-xl transition-all duration-300 group-hover/btn:bg-[#FF2D78] blur-lg opacity-50" />
+              <div className="relative bg-[#00FFD1] text-black text-3xl font-black px-12 py-6 rounded-xl transform -skew-x-6 transition-all duration-300 group-hover/btn:bg-[#FF2D78] group-hover/btn:text-white group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 flex items-center justify-center gap-4 border-2 border-white/20">
+                RULEBOOK
+                <svg 
+                  className="h-8 w-8 group-hover/btn:translate-y-1 transition-transform" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+              </div>
+            </a>
           </div>
-        </button>
+        )}
       </div>
 
       <div className="absolute top-0 left-0 w-24 h-24 border-t-4 border-l-4 border-[#FF2D78]/20" />

@@ -1,136 +1,8 @@
-import { useEffect, useRef } from "react";
-import * as THREE from "three";
 import Image from "next/image";
 import { FaLinkedin } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 export function SpeakersSection() {
-  const mountRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!mountRef.current) return;
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000
-    );
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    mountRef.current.appendChild(renderer.domElement);
-
-    // Create geometric shapes
-    const shapes: THREE.Mesh[] = [];
-    const geometries = [
-      new THREE.CircleGeometry(0.5, 32),
-      new THREE.BoxGeometry(0.8, 0.8, 0.8),
-      new THREE.ConeGeometry(0.5, 0.8, 3), // Triangle
-    ];
-
-    const materials = [
-      new THREE.MeshBasicMaterial({
-        color: 0xffffff,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.8,
-      }),
-      new THREE.MeshBasicMaterial({
-        color: 0xff1493,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.8,
-      }),
-    ];
-
-    // Create more shapes in a larger grid
-    for (let i = -10; i < 10; i++) {
-      for (let j = -10; j < 10; j++) {
-        const geometryIndex = Math.floor(Math.random() * geometries.length);
-        const materialIndex = Math.floor(Math.random() * materials.length);
-
-        const shape = new THREE.Mesh(
-          geometries[geometryIndex],
-          materials[materialIndex]
-        );
-
-        // Position in grid with some randomization
-        shape.position.x = i * 1.5 + (Math.random() - 0.5);
-        shape.position.y = j * 1.5 + (Math.random() - 0.5);
-        shape.position.z = (Math.random() - 0.5) * 5;
-
-        // Random rotation
-        shape.rotation.x = Math.random() * Math.PI;
-        shape.rotation.y = Math.random() * Math.PI;
-
-        // Add custom properties for animation
-        shape.userData = {
-          rotationSpeed: (Math.random() - 0.5) * 0.01,
-          floatSpeed: Math.random() * 0.005,
-          floatOffset: Math.random() * Math.PI * 2,
-          originalY: shape.position.y,
-        };
-
-        shapes.push(shape);
-        scene.add(shape);
-      }
-    }
-
-    camera.position.z = 15;
-
-    // Animation
-    let time = 0;
-    const animate = () => {
-      requestAnimationFrame(animate);
-      time += 0.01;
-
-      shapes.forEach((shape) => {
-        // Rotation animation
-        shape.rotation.x += shape.userData.rotationSpeed;
-        shape.rotation.y += shape.userData.rotationSpeed;
-
-        // Floating animation
-        shape.position.y =
-          shape.userData.originalY +
-          Math.sin(time + shape.userData.floatOffset) * 0.3;
-      });
-
-      // Slowly rotate entire scene
-      scene.rotation.y += 0.001;
-      scene.rotation.x = Math.sin(time * 0.1) * 0.1;
-
-      renderer.render(scene, camera);
-    };
-
-    animate();
-
-    // Handle window resize
-    const handleResize = () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    // Cleanup
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      mountRef.current?.removeChild(renderer.domElement);
-      shapes.forEach((shape) => {
-        scene.remove(shape);
-        shape.geometry.dispose();
-        if (Array.isArray(shape.material)) {
-          shape.material.forEach((m) => m.dispose());
-        } else {
-          shape.material.dispose();
-        }
-      });
-      renderer.dispose();
-    };
-  }, []);
-
   const speakers = [
     {
       name: "YASH AWIDRA",
@@ -152,12 +24,10 @@ export function SpeakersSection() {
 
   return (
     <section id="speakers" className="relative bg-black">
-      {/* Three.js canvas container */}
-      <div
-        ref={mountRef}
-        className="absolute inset-0 -z-10 bg-black"
+      {/* Simple gradient background instead of Three.js canvas */}
+      <div 
+        className="absolute inset-0 -z-10"
         style={{
-          opacity: 1,
           backgroundImage:
             "radial-gradient(circle at center, rgba(255,20,147,0.2) 0%, rgba(0,0,0,1) 70%)",
         }}

@@ -73,7 +73,7 @@ export function Footer() {
             {/* Social Links */}
             <motion.div className="flex gap-6">
               <Link 
-                href="https://instagram.com" 
+                href="https://www.instagram.com/iete_thapar?igsh=cWJ3NDN5cjg5cXZt" 
                 target="_blank"
                 className="bg-white/5 p-3 rounded-lg hover:bg-[#FF0B7B]/20 transition-colors group"
               >
@@ -87,7 +87,7 @@ export function Footer() {
                 <Github className="w-5 h-5 text-[#00F0FF] group-hover:scale-110 transition-transform" />
               </Link>
               <Link 
-                href="https://linkedin.com" 
+                href="https://www.linkedin.com/company/iete-thapar/" 
                 target="_blank"
                 className="bg-white/5 p-3 rounded-lg hover:bg-white/20 transition-colors group"
               >
