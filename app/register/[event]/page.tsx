@@ -80,6 +80,8 @@ export default function RegistrationForm({
       template_params: {
         team_name: formData.teamLeader.name,
         team_email: formData.teamLeader.email,
+        leaderName: formData.teamLeader.name,
+        event: (await params).event,
       },
     };
 

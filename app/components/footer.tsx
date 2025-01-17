@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Link from "next/link";
 import { Instagram, Github, Linkedin } from "lucide-react";
 import { motion } from "framer-motion";
@@ -15,8 +15,11 @@ export function Footer() {
   const contactInfo = [
     { title: "IETE Students' Forum", value: "TIET, Patiala" },
     { title: "Email", value: "iete_sc@thapar.edu" },
-    { title: "Contact", value: "+91 93065 xxxx" },
-    { title: "Location", value: "Thapar Institute of Engineering & Technology, Patiala" },
+    { title: "Contact", value: "+91 93065 15524" },
+    {
+      title: "Location",
+      value: "Thapar Institute of Engineering & Technology, Patiala",
+    },
   ];
 
   return (
@@ -36,7 +39,9 @@ export function Footer() {
             transition={{ duration: 0.5 }}
             className="space-y-6"
           >
-            <h3 className="text-[#FF0B7B] font-bold text-xl mb-4">Quick Links</h3>
+            <h3 className="text-[#FF0B7B] font-bold text-xl mb-4">
+              Quick Links
+            </h3>
             <div className="grid grid-cols-2 gap-4">
               {quickLinks.map((link, index) => (
                 <Link
@@ -54,7 +59,7 @@ export function Footer() {
           {/* Center Column - Logo and Social */}
           <motion.div className="flex flex-col items-center gap-8">
             <Link href="/" className="relative group">
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
@@ -72,22 +77,22 @@ export function Footer() {
 
             {/* Social Links */}
             <motion.div className="flex gap-6">
-              <Link 
-                href="https://instagram.com" 
+              <Link
+                href="https://instagram.com"
                 target="_blank"
                 className="bg-white/5 p-3 rounded-lg hover:bg-[#FF0B7B]/20 transition-colors group"
               >
                 <Instagram className="w-5 h-5 text-[#FF0B7B] group-hover:scale-110 transition-transform" />
               </Link>
-              <Link 
-                href="https://github.com" 
+              <Link
+                href="https://github.com"
                 target="_blank"
                 className="bg-white/5 p-3 rounded-lg hover:bg-[#00F0FF]/20 transition-colors group"
               >
                 <Github className="w-5 h-5 text-[#00F0FF] group-hover:scale-110 transition-transform" />
               </Link>
-              <Link 
-                href="https://linkedin.com" 
+              <Link
+                href="https://linkedin.com"
                 target="_blank"
                 className="bg-white/5 p-3 rounded-lg hover:bg-white/20 transition-colors group"
               >
@@ -103,12 +108,16 @@ export function Footer() {
             transition={{ duration: 0.5 }}
             className="space-y-6"
           >
-            <h3 className="text-[#00F0FF] font-bold text-xl mb-4">Contact Information</h3>
+            <h3 className="text-[#00F0FF] font-bold text-xl mb-4">
+              Contact Information
+            </h3>
             <div className="space-y-4">
               {contactInfo.map((info, index) => (
                 <div key={index} className="text-gray-400">
                   <h4 className="text-white text-sm">{info.title}</h4>
-                  <p className="hover:text-[#00F0FF] transition-colors">{info.value}</p>
+                  <p className="hover:text-[#00F0FF] transition-colors">
+                    {info.value}
+                  </p>
                 </div>
               ))}
             </div>
@@ -116,16 +125,25 @@ export function Footer() {
         </div>
 
         {/* Bottom Section */}
-        <motion.div 
+        <motion.div
           className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
           <div className="flex gap-6 text-sm text-gray-400">
-            <Link href="/about" className="hover:text-white transition-colors">About Us</Link>
-            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-white transition-colors">Terms of Use</Link>
+            <Link href="/about" className="hover:text-white transition-colors">
+              About Us
+            </Link>
+            <Link
+              href="/privacy"
+              className="hover:text-white transition-colors"
+            >
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="hover:text-white transition-colors">
+              Terms of Use
+            </Link>
           </div>
           <div className="flex items-center gap-2">
             <span className="text-[#FF0B7B]">Made with</span>
