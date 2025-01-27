@@ -15,7 +15,7 @@ export default function Page() {
       <Hero />
       <AboutSection />
       <DiscoverSection />
-      <SpeakersSection />
+
       <FAQSection />
       <Footer />
     </div>
